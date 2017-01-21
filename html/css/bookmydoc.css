@@ -70,6 +70,7 @@
 		.header {
 			text-align: center;
 			padding: 0.5%;
+			background: #1a056d;
 		}
 		.logo {
 			width: 30%;
@@ -127,25 +128,35 @@
 
 		/*DOCTOR LOGIN*/
 
-		.login-body {
-			background: white;
-		}
-
 		.login-card {
 			text-align: center;
-			width: 40%;
+			width: 25%;
 			margin: auto;
-			background: black;
+			background: white;
 			padding: 2%;
 			margin-top: 5%;
 			min-height: 60vh;
 
 		}
 
-
+		.login-submit  {
+			border: 0px;
+			background: indigo;
+			color: white;
+			width: 30%;
+			padding: 1%;
+		}
 
 		.login-field {
-			background: white;
-			width: 50%;
+			background: #dcd9dd;
+			color: black;
+			width: 70%;
 			font-size: 20px;
+			border: 0px;
+			padding: 1%;
+		}
+
+		.login-image span {
+			color: black;
+			font-size: 30px;
 		}
