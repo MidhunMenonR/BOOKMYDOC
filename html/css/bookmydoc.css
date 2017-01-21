@@ -147,6 +147,10 @@
 			padding: 1%;
 		}
 
+		.login-details {
+			padding-top: 3%;
+		}
+
 		.login-field {
 			background: #dcd9dd;
 			color: black;
