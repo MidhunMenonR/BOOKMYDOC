@@ -1,3 +1,7 @@
+
+
+//document.getElementById("myBtn").addEventListener("click", displayDate);
+
 /*NAVBAR*/
 
 function openNav() {
@@ -27,4 +31,9 @@ function openTab(tab) {
 	       x[i].style.display = "none";  
 	    }
 	    document.getElementById(tab).style.display = "block";  
-	}
+}
+
+/*Search*/
+
+
+

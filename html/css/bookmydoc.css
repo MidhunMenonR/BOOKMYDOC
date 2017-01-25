@@ -23,7 +23,7 @@
 			background: white;
 			padding: 1%;
 			margin-top: 5%;
-
+			box-shadow: 0px 0px 20px #888;
 		}
 		.detail {
 			text-align: left;
@@ -37,13 +37,13 @@
 			background: lightgrey;
 			width: 100%;
 			margin: 0px;
-			/*padding:1%;*/
+			
 		}
 		.second {
 			height: 50%;
+			
 		}
 		
-
 		.second ul.tab {
 		    list-style-type: none;
 		    margin: auto;
@@ -77,11 +77,12 @@
 		}
 		.search {
 			text-align: center;
+			margin: 0px;
 		}
 		.search img {
 			width:15%;
 			padding: 2%;
-			padding-top: 13%;
+			padding-top: 10%;
 		}
 
 
@@ -125,6 +126,25 @@
 		    transition: margin-left .5s;
 		}
 
+		.searchtext {
+			width: 15%;
+			padding: 0.3%;	
+			font-size: 20px;
+			margin: 1.5%;
+			border: none;
+		  	border-bottom: solid 2px #c9c9c9;
+		  	transition: border 0.3s;
+		}
+
+		.searchformsubmit {
+			border: 0px;
+			background: indigo;
+			color: white;
+			width: 10%;
+			font-size: 18px;
+			padding: 0.3%;
+			
+		}
 
 		/*DOCTOR LOGIN*/
 
@@ -136,6 +156,7 @@
 			padding: 2%;
 			margin-top: 5%;
 			min-height: 60vh;
+			box-shadow: 0px 0px 20px black;
 
 		}
 
