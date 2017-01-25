@@ -16,6 +16,17 @@
     		height:10%;
 
 		}
+		.second1{
+		    display: flex;	
+			text-align: left;
+			margin-left: 10%;
+			padding: 2%;
+    		height:20%;
+		}
+		.third{
+			width: 70%;
+			margin-top: 25px;
+		}
 		.card {
 			text-align: center;
 			width: 70%;
@@ -24,14 +35,45 @@
 			padding: 1%;
 			margin-top: 5%;
 			box-shadow: 0px 0px 20px #888;
+		    
+
 		}
+		.card1 {
+			text-align: left;
+			width: 50%;
+			margin: auto;
+			background: white;
+			padding: 1%;
+			margin-top: 2%;
+			box-shadow: 0px 0px 20px #888;
+
+		}
+		.confirm{
+			text-align: left;
+			width: 55%;
+			margin:auto;
+			background: white;
+			padding: 1%;
+			margin-top: 5%;
+			box-shadow: 0px 0px 20px #888;
+		} 
 		.detail {
 			text-align: left;
 			width: 50%;
 			
 		}
+		.detail1 {
+			text-align: left;
+			width: 30%;
+			margin-left: 20px;
+			
+		}
 		.pic {
 			width: 50%;
+		}
+		.pic1{
+			width: 10%;
+			margin-left: -30px;
 		}
 		.profile-body {
 			background: lightgrey;
@@ -159,7 +201,21 @@
 			box-shadow: 0px 0px 20px black;
 
 		}
+		.login1{
+			display: flex;
+			width: 120px;
 
+		}
+		.login2{
+			margin-left: 10px;
+		}
+
+        .login{
+        	text-align: center;
+        	margin-left: 265px;
+        	width: 100px;
+
+        }
 		.login-submit  {
 			border: 0px;
 			background: indigo;
