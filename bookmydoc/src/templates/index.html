@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book My Doc</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="{% static "css/bookmydoc.css"   %}">
+</head>
+<body >
+	<div id="main">
+		<div class="header">
+			<span style=" font-size: 36px;cursor:pointer;float: left; color: white;vertical-align: middle;padding-left: 1%;padding-top: 1%" onclick="openNav()">&#9776;</span>
+			<img src="{% static "img/icon1.png"   %}" height="100%" class="logo">
+		</div>
+		<div class="search" >
+			<img src="{% static "img/name1.png"   %}" >
+			<img src="{% static "img/location1.png"   %}" >
+			<img src="{% static "img/dept1.png"   %}" ><br><br>
+			<div>
+				<form action="/search-submit/" method ="GET" class="searchform">
+					<input type="text" name="srchname" placeholder="Name" class="searchtext">
+					<input type="text" name="srchloc" placeholder="Location" class="searchtext">
+					<input type="text" name="srchdept" placeholder="Dept" class="searchtext"><br><br>
+					<input type="submit" name="submitsearc" value="Search" class="searchformsubmit">
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(1)" >&#10148;</a>
+			<a href="index.html">Home</a>
+			<a href="login.html">Doctor Registration</a>
+			<a href="#">About</a>
+			<a href="#">Help</a>
+	</div>
+
+	<script type="text/javascript" src="{% static "js/bmd.js"   %}"></script>
+</body>
+</html>

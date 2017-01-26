@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Doctor Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="{% static "css/bookmydoc.css"   %}">
+</head>
+<body class="login-body" background="{% static "img/loginbg.jpg"   %}">
+	
+		<div class="login-card" >
+			<form action="/login-submit/" method="POST"> {% csrf_token %}
+				<div class="login-image">
+					<img src="{% static "img/login.png"   %}" width="30%"><br><br>
+					<span>Book  My Doc</span><br><br><br>
+				</div>
+				
+				<div class="login-details">
+					
+					<input class="login-field" type="name" name="usrnm" placeholder="Username"><br><br>
+					<input class="login-field" type="password" name="pwd" minlength="8" placeholder="Password"><br><br><br>
+				</div>
+				<input type="submit" name="submit" value="Log In" class="login-submit">
+			</form>
+			
+		</div>
+	
+
+	<script type="text/javascript" src="{% static "js/bmd.js"   %}""></script>
+</body>
+</html>
