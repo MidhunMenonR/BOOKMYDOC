@@ -24,13 +24,49 @@ function closeNav(page) {
 
 /*tab*/
 
-function openTab(tab) {
+function openTab(tab,tabnum) {
 	    var i;
 	    var x = document.getElementsByClassName("tabContent");
 	    for (i = 0; i < x.length; i++) {
 	       x[i].style.display = "none";  
 	    }
-	    document.getElementById(tab).style.display = "block";  
+	    document.getElementById(tab).style.display = "block";
+	    if (tabnum==1) {
+	    	document.getElementById('tab1').style.borderTop = "solid 10px black"; 
+	    	document.getElementById('tab2').style.border = "none"; 
+	    	document.getElementById('tab3').style.border = "none"; 
+	    	document.getElementById('tab1').style.backgroundColor = "white";
+	    	document.getElementById('tab2').style.backgroundColor = "black";
+	    	document.getElementById('tab3').style.backgroundColor = "black";
+
+	    	document.getElementById('tablink1').style.color = "black";
+	    	document.getElementById('tablink2').style.color = "white";
+	    	document.getElementById('tablink3').style.color = "white";
+	    } 
+	    else if (tabnum==2) {
+	    	document.getElementById('tab2').style.borderTop = "solid 10px black"; 
+	    	document.getElementById('tab1').style.border = "none"; 
+	    	document.getElementById('tab3').style.border = "none";
+	    	document.getElementById('tab2').style.backgroundColor = "white";
+	    	document.getElementById('tab1').style.backgroundColor = "black";
+	    	document.getElementById('tab3').style.backgroundColor = "black"; 
+
+	    	document.getElementById('tablink2').style.color = "black";
+	    	document.getElementById('tablink1').style.color = "white";
+	    	document.getElementById('tablink3').style.color = "white";
+	    } 
+	    else{
+	    	document.getElementById('tab3').style.borderTop = "solid 10px black"; 
+	    	document.getElementById('tab2').style.border = "none"; 
+	    	document.getElementById('tab1').style.border = "none"; 
+	    	document.getElementById('tab3').style.backgroundColor = "white";
+	    	document.getElementById('tab2').style.backgroundColor = "black";
+	    	document.getElementById('tab1').style.backgroundColor = "black";
+
+	    	document.getElementById('tablink3').style.color = "black";
+	    	document.getElementById('tablink2').style.color = "white";
+	    	document.getElementById('tablink1').style.color = "white";
+	    } 
 }
 
 /*Search*/
