@@ -6,6 +6,15 @@
 		body {
 			margin: 0px;
 		}
+		.nav-icon {
+			font-size: 36px;
+			cursor:pointer;
+			float: left;
+			 color: white;
+			 vertical-align: middle;
+			 padding-left: 1%;
+			 padding-top: 1%
+		}
 
 		/*DOCTOR PROFILE */
 
@@ -211,12 +220,18 @@
         	margin-left: 60%;
         	width: 30%;
         }
+        .doc-detail{
+        	font-size: 15px;
+        }
 
+        .doc-name{
+        	font-size: 20px;
+        }
 
 		/*CONFIRMATIONPAGE*/
 
 		.confirm{
-			text-align: left;
+			text-align: center;
 			width: 55%;
 			margin:auto;
 			background: white;
@@ -228,6 +243,7 @@
 		.login1{
 			display: flex;
 			width: 50%;
+			margin-left: 30%;
 
 		}
 		.login2{
@@ -243,4 +259,156 @@
         	width: 20%;
         	font-size: 15px;
         }
-        	
+        
+        .phonelabel{
+        	font-size: 20px;
+        }
+
+        .bookid{
+        	font-size: 20px;
+        }
+
+        @media only screen and (max-width: 768px) {
+			/* For mobile phones: */
+			.login-card{
+				width: 70%;
+			    margin-top:22%; 
+			    padding-bottom: 10%;
+			    padding-top: 5%;
+			}
+			
+			.nav-icon{
+				font-size: 13px;
+			}
+
+			.card1 {
+				width: 80%;
+			}
+			.detail1{
+				font-size: 15px;
+				width: 60%;
+			}	
+
+			.doc-detail{
+	        	font-size: 10px;
+	        }
+
+	        .doc-name{
+	        	font-size: 15px;
+	        	width: 100%;
+	        }		
+
+	        .pic1{
+	        	width: 40%;
+	        }
+
+
+		 	.login{
+        		margin-left: 40%;
+	        	width: 50%;
+	        	font-size: 10px;
+        	}
+        	.sidenav a{
+	        	font-size: 15px;
+	        	padding-left: 10px;
+	        }
+	        .sidenav .closebtn {
+	        	font-size: 20px;
+	        }
+	        .confirm{
+	        	width: 85%;
+	        	height: 85vh;
+	        }
+	        .phonelabel{
+	        	font-size: 15px;
+	        }
+	        .bookid{
+        		font-size: 15px;
+        	}
+        	.login2{
+				margin-left: 1%;
+				font-size: 15px;
+				width:130px;
+			}
+			.login1{
+				margin-left: 10%;
+			}
+			.loginconform{
+				text-align: center;
+				width: 80px;
+				font-size: 10px;
+			}
+		}
+
+		@media only screen and (max-width: 359px) {
+			/* For mobile phones: */
+			.login-card{
+				width: 70%;
+			    margin-top:22%; 
+			    padding-bottom: 10%;
+			    padding-top: 5%;
+			}
+			
+			.nav-icon{
+				font-size: 13px;
+			}
+
+			.card1 {
+				width: 80%;
+			}
+			.detail1{
+				font-size: 15px;
+				width: 80%;
+			}	
+
+			.doc-detail{
+	        	font-size: 10px;
+	        }
+
+	        .doc-name{
+	        	font-size: 15px;
+	        	width: 100%;
+	        }		
+
+	        .pic1{
+	        	width: 50%; 
+	        }
+
+
+		 	.login{
+        		margin-left: 40%;
+	        	width: 50%;
+	        	font-size: 10px;
+        	}
+
+        	.sidenav a{
+	        	font-size: 15px;
+	        	padding-left: 10px;
+	        }
+	        .sidenav .closebtn {
+	        	font-size: 20px;
+	        }
+	        .phonelabel{
+	        	font-size: 15px;
+	        }
+	        .bookid{
+        		font-size: 15px;
+        	}
+        	.confirm{
+	        	width: 80%;
+	        	height: 85vh;
+	        }
+        	.login2{
+				margin-left: 1%;
+				font-size: 15px;
+				width:130px;
+			}
+			.login1{
+				margin-left: 5%;
+			}
+			.loginconform{
+				text-align: center;
+				width: 80px;
+				font-size: 10px;
+			}
+		}

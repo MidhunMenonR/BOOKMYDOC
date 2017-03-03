@@ -6,6 +6,16 @@
 			margin: 0px;
 		}
 
+		.nav-icon {
+			font-size: 36px;
+			cursor:pointer;
+			float: left;
+			 color: white;
+			 vertical-align: middle;
+			 padding-left: 1%;
+			 padding-top: 1%
+		}
+
 		/*DOCTOR PROFILE */
 
 		
@@ -96,6 +106,10 @@
 		    padding: 6px 12px;
 		    border: 1px solid #ccc;
 		    border-top: none;
+		}
+
+		.docname{
+			font-size: 25px;
 		}
 
 		/*INDEX*/
@@ -219,4 +233,64 @@
 		.login-image span {
 			color: black;
 			font-size: 30px;
+		}
+
+
+		@media only screen and (max-width: 768px) {
+			/* For mobile phones: */
+			.login-card{
+				width: 70%;
+			    margin-top:22%; 
+			    padding-bottom: 10%;
+			    padding-top: 5%;
+			}
+			
+			.nav-icon{
+				font-size: 13px;
+			}
+
+			.search {
+				margin-top: 20%;
+			}
+			.searchtext{
+				width: 60%;
+				font-size: 15px;
+			}
+			.searchformsubmit{
+				width: 30%;
+				font-size: 15px;
+			}
+
+			.doc-detail{
+	        	font-size: 10px;
+	        }
+
+	        .docname{
+	        	font-size: 15px;
+	        	width: 100%;
+	        }
+
+	        .second ul.tab li a {
+	        	font-size: 15px;
+	        }
+
+	        .second ul.tab li{
+	        	padding: 0;
+	        }
+	        .card{
+	        	margin-top: 25%;
+	        	width: 80%;
+	        	padding-bottom: 20%;
+	        }
+	        .tabhead{
+	        	font-size: 18px;
+	        }
+	        .sidenav a{
+	        	font-size: 15px;
+	        	padding-left: 10px;
+	        }
+	        .sidenav .closebtn {
+	        	font-size: 20px;
+	        }
+
 		}
