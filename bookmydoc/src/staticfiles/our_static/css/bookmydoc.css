@@ -47,30 +47,56 @@
 			
 		}
 		.second {
-			height: 50%;
+			
+			width: 100%;
 			
 		}
-		
+
 		.second ul.tab {
 		    list-style-type: none;
 		    margin: auto;
 		    padding: 0;
 		    overflow: hidden;
-		    background-color: #333;
 		    text-align: center;
 		    display: flex;
+		    width: 100%;
+		    background: black;
+		}
+
+		.second ul.tab li{
+			width: 60%;
+			text-align: center;
+			padding-left: 10%;
+			padding-right: 10%;
+			
 		}
 
 		.second ul.tab li a {
 		    display: inline-block;
-		    color: #f2f2f2;
+		    color:white;
 		    text-align: center;
 		    padding: 10px;
 		    text-decoration: none;
 		    transition: 0.3s;
-		    font-size: 17px;
+		    font-size: 150%;
+
+		    
 		}
-		.second ul.tab li a:hover {background-color: #555;}
+		.second ul.tab li:hover {background-color: grey;}
+
+		.tabdiv {
+			display: flex;
+			text-align: center;
+			margin: auto;
+			width: 60%;
+		}
+
+		.tabcontent {
+		    display: none;
+		    padding: 6px 12px;
+		    border: 1px solid #ccc;
+		    border-top: none;
+		}
 
 		/*INDEX*/
 
@@ -181,11 +207,12 @@
 		}
 
 		.login-field {
-			background: #dcd9dd;
+			/*background: #dcd9dd;*/
 			color: black;
 			width: 70%;
 			font-size: 20px;
-			border: 0px;
+			border: none;
+		  	border-bottom: solid 2px #c9c9c9;
 			padding: 1%;
 		}
 

@@ -3,6 +3,8 @@ from django.contrib import admin
 # Register your models here.
 from .models import DocDetails
 from .models import Locations	
+from .models import BookDoc
+from .models import BookDetails
 
 
 # class Docdetailsadmin(admin.ModelAdmin):
@@ -12,3 +14,5 @@ from .models import Locations
 
 admin.site.register(DocDetails)
 admin.site.register(Locations)
+admin.site.register(BookDoc)
+admin.site.register(BookDetails)

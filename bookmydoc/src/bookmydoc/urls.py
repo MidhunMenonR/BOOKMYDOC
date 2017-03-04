@@ -12,7 +12,10 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
     url(r'^login-submit/', 'docProfile.views.loginform'),
     url(r'^search-submit/', 'docProfile.views.searchform'),
+    url(r'^view-docdetails/', 'docProfile.views.docdetails'),
     url(r'^login/', 'docProfile.views.loginPage'),
+    url(r'^book-doct/', 'docProfile.views.bookDoc'),
+
     url(r'^admin/', include(admin.site.urls)),
 
 ] 

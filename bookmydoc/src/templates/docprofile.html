@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Doctor Details</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/bookmydoc.css">
+	<link rel="stylesheet" type="text/css" href="{% static "css/bookmydoc.css"   %}">
 </head>
 <body class="profile-body">
 	
@@ -12,27 +13,29 @@
 	<div id="main">
 		<div class="header" >
 			<span style=" font-size: 36px;cursor:pointer;float: left; color: white;vertical-align: middle;padding-left: 1%;padding-top: 1%" onclick="openNav()">&#9776;</span>
-			<img src="img/icon1.png" height="100%" class="logo">
+			<img src="{% static "img/icon1.png" %}" height="100%" class="logo">
 		</div>
 		<div class="card">
 			<div class="first">
 				<div class="pic">
-					<img width="50%" src="img/name1.png">
+					<img width="50%" src="{% static "img/name1.png" %}">
 				</div>
 				<div class="detail">
-					<span style="font-size: 25px">Doctor Name</span><br>
-					<span>Qualification</span><br>
+					<span style="font-size: 25px">{{ doctor.doc_name }}</span><br>
+					<span>{{ doctor.doc_department }}</span><br>
 					<span>Address</span><br>
 
 				</div>
 			</div>
-			<div class="second" style="width: 100%;">
+			<div class="second">
 				<ul class="tab" ">
-					<li><a href="javascript:void(0)" onclick="openTab('Tab1')">Tab1</a></li>
-					<li><a href="javascript:void(0)" onclick="openTab('Tab2')">Tab2</a></li>
-					<li><a href="javascript:void(0)" onclick="openTab('Tab3')">Tab3</a></li>
+					<div class="tabdiv">
+						<li id="tab1" onclick="openTab('Tab1','1')"><a href="javascript:void(0)" id="tablink1" >Tab1</a></li>
+						<li id="tab2" onclick="openTab('Tab2','2')""><a href="javascript:void(0)" id="tablink2" ">Tab2</a></li>
+						<li id="tab3" onclick="openTab('Tab3','3')"><a href="javascript:void(0)" id="tablink3"  >Tab3</a></li>
+					</div>
 				</ul>
-
+				<!-- 
 				<div id="Tab1" class=" tabContent">
 				  <h2>Tab1</h2>
 				  <p>Tab1 content</p>
@@ -46,7 +49,52 @@
 				<div id="Tab3" class=" tabContent" style="display:none">
 				  <h2>Tab3</h2>
 				  <p>Tab3 content</p>
-				</div>
+				</div> -->
+
+				{% for l in locs %}	
+					<div id="Tab{{forloop.counter}}" class=" tabContent"   {% if not forloop.first %} style="display:none" {% endif %}  >
+						 <!--  m = forloop.counter -->
+						<form action="/book-doct/" method="GET"> 
+						  <h2>{{ l.location }}</h2>
+						  {% if forloop.first %}
+						  <p> {% for t in times.0 %}
+						  			<!-- {{t}} -->
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+
+						  </p>
+						  {% endif %}
+						  {% if forloop.counter == 2 %} 
+						  	<p> {% for t in times.1 %}
+						  			<!-- {{t}} -->
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+
+						  </p>
+
+
+						  {% endif %}
+						  {% if forloop.counter == 3 %} 
+						  	<p> {% for t in times.2 %}
+						  			<!-- {{t}} -->
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+						  			
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+
+						  </p>
+
+
+						  {% endif %}
+						  <input type="submit" name="submit" value="BOOK" class="login">
+						</form>
+
+
+					</div>
+				{% endfor %}
 
 
 			</div>
@@ -58,10 +106,9 @@
 			<a href="login.html">Doctor Registration</a>
 			<a href="#">About</a>
 			<a href="#">Help</a>
-	</div>
 
 
 
-	<script src="js/bmd.js"></script>
-</body>
+
+	<script src="{% static "js/bmd.js" %}"></script>
 </html>

@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Confirmation Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/tiyaneethu.css">
+	<link rel="stylesheet" type="text/css" href="{% static "css/bookmydoc.css"   %}">
 </head>
 <body class="profile-body">
 	
@@ -12,7 +13,7 @@
 	<div id="main">
 		<div class="header" >
 			<span style=" font-size: 36px;cursor:pointer;float: left; color: white;vertical-align: middle;padding-left: 1%;padding-top: 1%" onclick="openNav()">&#9776;</span>
-			<img src="img/icon1.png" height="100%" class="logo">
+			<img src="{% static "img/icon1.png" %}" height="100%" class="logo">
 		</div>
 		<div class="confirm">
 		<div style="margin-left: 20px">
@@ -26,6 +27,7 @@
 			   	</div>		
 			</form>
 			<br><br>
+			<p>{{time}}</p>
 	        <p> Booking ID should be produced 30 minutes before the allotted time to confirm the appointment!</p>
         </div>
         </div>
@@ -40,6 +42,6 @@
 
 
 
-	<script src="js/bmd.js"></script>
+	<script src="{% static "js/bmd.js" %}"></script>
 </body>
 </html>
