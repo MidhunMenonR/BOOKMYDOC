@@ -6,15 +6,21 @@ class DocDetails(models.Model) :
 	doc_username = models.CharField(max_length=20,primary_key =True,unique = True)
 	doc_password = models.CharField(max_length=20)
 	doc_name =  models.CharField(max_length=50)
-	doc_location = models.CharField(max_length=50)
 	doc_phone = models.CharField(max_length=13)
 	doc_department = models.CharField(max_length=20)
+	email = models.EmailField(max_length = 254)
+	qualification = models.CharField(max_length=100)
+	experience = models.CharField(max_length=20)
+	image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+
+
 	def __unicode__(self):
 		return self.doc_username
 
 class Locations(models.Model) :
 	doc_id = models.ForeignKey(DocDetails)
 	location = models.CharField(max_length=50,unique = True)
+	area = models.CharField(max_length = 50)
 	def __unicode__(self):
 		return self.location	
 

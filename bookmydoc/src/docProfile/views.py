@@ -60,16 +60,115 @@ def searchform(request):
 	print 'name' + data['srchname']
 	print 'loc' + data['srchloc']
 	print 'dept' + data['srchdept']
+	docobjectlist = []
 
-	doctors = DocDetails.objects.filter(doc_name = data['srchname'])
+
+	if data['srchloc'] :
+		tloclist = []
+		slocations = Locations.objects.filter(area__icontains  = data['srchloc'])
+		for sl in slocations:
+			doctor = DocDetails.objects.get(doc_username = sl.doc_id)
+			tloclist.append(doctor)
+		tloclist = list(set(tloclist))
+		if data['srchname'] :
+			tnamlist = []
+			for tl in tloclist :
+				if data['srchname'] in tl.doc_name.lower() :
+					tnamlist.append(tl)
+			if data['srchdept']	:
+				for tn in tnamlist :
+					if data['srchdept'] in tn.doc_department.lower() :
+						docobjectlist.append(tn)
+			else :
+				for tn in tnamlist :
+					docobjectlist.append(tn)
+
+		elif data['srchdept']:
+			for tl in tloclist :
+					if data['srchdept'] in tl.doc_department.lower() :
+						docobjectlist.append(tl)
+		else :
+			docobjectlist = tloclist
+	elif data['srchdept'] :
+		doctor = DocDetails.objects.filter(doc_department__icontains = data['srchdept'] )	
+		if data['srchname'] :
+			for d in doctor :
+				if 	data['srchname'] in d.doc_name.lower() :
+					print "working"
+					docobjectlist.append(d)
+		else :
+			docobjectlist = doctor
+	elif data['srchname'] :
+		docobjectlist = DocDetails.objects.filter(doc_name__icontains = data['srchname'])
+									
+						
 
 
-	for d in doctors:
+
+
+
+
+			
+
+
+	# if data['srchloc'] :
+	# 	tloclist = []
+	# 	slocations = Locations.objects.filter(area__icontains  = data['srchloc'])
+	# 	for sl in slocations:
+	# 		moredoctors = DocDetails.objects.get(doc_username = sl.doc_id)
+	# 		if data['srchname'] :
+	# 				tempdocobjectlist = []
+	# 				sdoctors = DocDetails.objects.filter(doc_name__icontains = data['srchname'])
+	# 				for sdo in sdoctors :
+	# 					if sdo.doc_username == moredoctors.doc_username :
+	# 						tempdocobjectlist.append(moredoctors)
+	# 				if data['srchdept'] :
+	# 					sdepts = DocDetails.objects.filter(doc_department__icontains  = data['srchdept'])
+	# 					for sd in sdepts:
+	# 						for temp in tempdocobjectlist :
+	# 							if sd.doc_username == temp.doc_username :
+	# 								docobjectlist.append(moredoctors)
+	# 				else :
+	# 					docobjectlist.append(moredoctors)
+
+
+
+	# 		else :	
+	# 			docobjectlist.append(moredoctors)	
+
+							
+
+
+
+
+	# if data['srchname'] :
+	# 	sdoctors = DocDetails.objects.filter(doc_name__icontains = data['srchname'])
+	# if data['srchloc'] :
+	# 	slocations = Locations.objects.filter(area__icontains  = data['srchloc'])
+	# if data['srchdept'] :	
+	# 	sdepts = DocDetails.objects.filter(doc_department__icontains  = data['srchdept'])
+	# # if data['srchloc'] :
+	# # 	for sl in slocations:
+	# # 		moredoctors = DocDetails.objects.filter(doc_username = sl.doc_id)
+	# # 		for md in moredoctors:
+	# # 			docobjectlist.append(md)
+	# if data['srchname'] :
+	# 	for sdo in sdoctors:
+	# 		docobjectlist.append(sdo)
+	# if data['srchdept'] :	
+	# 	for sd in sdepts:
+	# 		docobjectlist.append(sd)
+	
+
+	# docobjectlist=list(set(docobjectlist)) #to remove duplicates
+
+
+	for d in docobjectlist:
 		print d.doc_name
 		print d.doc_phone
 
 	context = {
-		"doctorslist" : doctors
+		"doctorslist" : docobjectlist
 
 	}
 
