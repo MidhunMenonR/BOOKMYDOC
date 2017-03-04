@@ -5,9 +5,17 @@
 /*NAVBAR*/
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "300px";
-    document.getElementById("main").style.marginLeft = "300px";
+    if(screen.width >768){
+        document.getElementById("mySidenav").style.width = "300px";
+        document.getElementById("main").style.marginLeft = "300px";
+    }
+    else{
+        document.getElementById("mySidenav").style.width = "150px";
+        document.getElementById("main").style.marginLeft = "150px"; 
+    }
+
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+      alert("open");
 }
 
 function closeNav(page) {
@@ -24,10 +32,7 @@ function closeNav(page) {
 
 /*tab*/
 
-
 function openTab(tab,tabnum) {
-        
-
         var i;
         var x = document.getElementsByClassName("tabContent");
         for (i = 0; i < x.length; i++) {
@@ -47,7 +52,6 @@ function openTab(tab,tabnum) {
             document.getElementById('tablink3').style.color = "white";
         } 
         else if (tabnum==2) {
-            
             document.getElementById('tab2').style.borderTop = "solid 10px black"; 
             document.getElementById('tab1').style.border = "none"; 
             document.getElementById('tab3').style.border = "none";

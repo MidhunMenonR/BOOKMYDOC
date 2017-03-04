@@ -5,39 +5,40 @@
 	<title>Confirmation Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static "css/bookmydoc.css"   %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/tiyaneethu.css"   %}">
 </head>
 <body class="profile-body">
 	
 
 	<div id="main">
 		<div class="header" >
-			<span style=" font-size: 36px;cursor:pointer;float: left; color: white;vertical-align: middle;padding-left: 1%;padding-top: 1%" onclick="openNav()">&#9776;</span>
+			<span class="nav-icon" onclick="openNav()">&#9776;</span>
 			<img src="{% static "img/icon1.png" %}" height="100%" class="logo">
 		</div>
 		<div class="confirm">
-		<div style="margin-left: 20px">
-		<h1 style="text-align: center;">Booking Successfull!</h1>
-		   	<span style="font-size: 20px">Booking ID:  XXX1234XXX</span><br><br>
-		   	<form>
-			   	<div class="login1">
-			   		<label class="phonelabel" for="Phone" style="font-size: 20px">Phone:</label>
-			         <input class="login2" type="nuumber" id="Phone" name="Phone">
-			         <input type="submit" name="submit" value="Submit" class="loginconfirm">
-			   	</div>		
-			</form>
-			<br><br>
-			<p>{{time}}</p>
-	        <p> Booking ID should be produced 30 minutes before the allotted time to confirm the appointment!</p>
+			<div >
+				<h1 style="text-align: center;">Booking Successfull!</h1>
+				   	<span class="bookid">Booking ID:  XXX1234XXX</span><br><br>
+				   	<form>
+					   	<div class="login1">
+					   		<label class="phonelabel" for="Phone">Phone:</label>
+					         <input class="login2" type="nuumber" id="Phone" name="Phone">
+					         <input type="submit" name="submit" value="Submit" class="loginconform">
+					   	</div>		
+					</form>
+					<br><br>
+				<p>{{time}}</p>
+		        <p> Booking ID should be produced 30 minutes before the allotted time to confirm the appointment!</p>
         </div>
         </div>
 	</div> 
+
 	<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
-			<a href="#">Home</a>
-			<a href="#">Doctor Registration</a>
-			<a href="#">About</a>
-			<a href="#">Help</a>
+			<a href="index.html" class="navtext">Home</a>
+			<a href="login.html" class="navtext">Doctor Registration</a>
+			<a href="#" class="navtext">About</a>
+			<a href="#" class="navtext">Help</a>
 	</div>
 
 

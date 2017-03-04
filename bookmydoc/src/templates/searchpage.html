@@ -12,7 +12,7 @@
 
 	<div id="main">
 		<div class="header" >
-			<span style=" font-size: 36px;cursor:pointer;float: left; color: white;vertical-align: middle;padding-left: 1%;padding-top: 1%" onclick="openNav()">&#9776;</span>
+			<span class="nav-icon" onclick="openNav()">&#9776;</span>
 			<img src="{% static "img/icon1.png"  %}" height="100%" class="logo">
 		</div>
 
@@ -30,9 +30,7 @@
 					    </div>
 					    <div class="third">
 					    		<input type="hidden" name="docusername" value="{{ d.doc_username }}">
-					    		<input type="submit" name="submit" value="BOOK" class="login">
-					    	
-					    	
+					    		<input type="submit" name="submit" value="BOOK" class="login">	
 					    </div>
 			        </div>
 			    </form>    
@@ -41,12 +39,11 @@
         
 	<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
-			<a href="#">Home</a>
-			<a href="#">Doctor Registration</a>
-			<a href="#">About</a>
-			<a href="#">Help</a>
+			<a href="index.html" class="navtext">Home</a>
+			<a href="login.html" class="navtext">Doctor Registration</a>
+			<a href="#" class="navtext">About</a>
+			<a href="#" class="navtext">Help</a>
 	</div>
-
 
 
 	<script src="{% static "js/bmd.js"  %}" ></script>

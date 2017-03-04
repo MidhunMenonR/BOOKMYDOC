@@ -10,7 +10,7 @@
 <body >
 	<div id="main">
 		<div class="header">
-			<span style=" font-size: 36px;cursor:pointer;float: left; color: white;vertical-align: middle;padding-left: 1%;padding-top: 1%" onclick="openNav()">&#9776;</span>
+			<span class="nav-icon" onclick="openNav()">&#9776;</span>
 			<img src="{% static "img/icon1.png"   %}" height="100%" class="logo">
 		</div>
 		<div class="search" >
@@ -30,11 +30,12 @@
 	</div>
 	<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(1)" >&#10148;</a>
-			<a href="index.html">Home</a>
-			<a href="login.html">Doctor Registration</a>
-			<a href="#">About</a>
-			<a href="#">Help</a>
+			<a href="index.html" class="navtext">Home</a>
+			<a href="login.html" class="navtext">Doctor Registration</a>
+			<a href="#" class="navtext">About</a>
+			<a href="#" class="navtext">Help</a>
 	</div>
+
 
 	<script type="text/javascript" src="{% static "js/bmd.js"   %}"></script>
 </body>
