@@ -5,7 +5,7 @@
 	<title>Confirmation Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static "css/tiyaneethu.css"   %}">
+	<link rel="stylesheet" type="text/css" href={% static "css/confirmationpage.css"   %}>
 </head>
 <body class="profile-body">
 	
@@ -17,26 +17,41 @@
 		</div>
 		<div class="confirm">
 			<div >
-				<h1 style="text-align: center;">Booking Successfull!</h1>
-				   	<span class="bookid">Booking ID:  XXX1234XXX</span><br><br>
-				   	<form>
+				<h2 style="text-align: center;"><u>Booking Details</u></h2>
+				<div style="text-align: left">
+				   	           
+				   	<label class="bookid" >Date      : {{ date }}</label><br>
+				   	<label class="bookid" >Doctor    : {{doctor}}</label><br>
+				   	<label class="bookid" >Time 	   : {{time}}</label><br>
+				   	<label class="bookid" >Location	   : {{location}}</label><br>
+
+				   	</div>
+
+				   	<div >
+				   	 <h2 style="text-align: center;"><u>Patient Details</u></h2>
+				   	 <form  action="/confirm-book/" method="GET"> {% csrf_token %}
 					   	<div class="login1">
-					   		<label class="phonelabel" for="Phone">Phone:</label>
-					         <input class="login2" type="nuumber" id="Phone" name="Phone">
-					         <input type="submit" name="submit" value="Submit" class="loginconform">
-					   	</div>		
-					</form>
-					<br><br>
-				<p>{{time}}</p>
-		        <p> Booking ID should be produced 30 minutes before the allotted time to confirm the appointment!</p>
-        </div>
+					   		<label class="bookid" for="Pname">Name:</label>
+					   		<input type="text" name="Pname"><br>
+					   		<label class="bookid" for="Phone">Phone:</label>
+					   		<input type="text" name="Phone"><br><br>
+					   		
+					   		<input type="hidden" name="dname" value="{{doctor}}">
+					   		<input type="hidden" name="location" value="{{location}}">
+					   		<input type="hidden" name="timeslot" value="{{time}}">
+					   		<input type="hidden" name="date" value="{{date}}">
+
+					   	</div>  
+					   	<input  type="submit" name="confirm" value="Confirm Booking">
+					 </form>  	
+					</div>
+	        </div>
         </div>
 	</div> 
-
 	<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
-			<a href="index.html" class="navtext">Home</a>
-			<a href="login.html" class="navtext">Doctor Registration</a>
+			<a href="/home/" class="navtext">Home</a>
+			<a href="/login/" class="navtext">Doctor Registration</a>
 			<a href="#" class="navtext">About</a>
 			<a href="#" class="navtext">Help</a>
 	</div>

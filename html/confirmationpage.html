@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
 	<title>Confirmation Page</title>
@@ -16,17 +16,24 @@
 		</div>
 		<div class="confirm">
 			<div >
-				<h1 style="text-align: center;">Booking Successfull!</h1>
-				   	<span class="bookid">Booking ID:  XXX1234XXX</span><br><br>
-				   	<form>
+				<h2 style="text-align: center;"><u>Booking Details</u></h2>
+				<div style="text-align: left">
+				   	           
+				   	<label class="bookid" for="date">Date      : 25/02/2014</label><br>
+				   	<label class="bookid" for="date">Doctor    : Dr.Ranjendra Prasad</label><br>
+				   	<label class="bookid" for="date">Time 	   : 10:40am</label><br>
+				   	</div>
+
+				   	<div >
+				   	 <h2 style="text-align: center;"><u>Patient Details</u></h2>
 					   	<div class="login1">
-					   		<label class="phonelabel" for="Phone">Phone:</label>
-					         <input class="login2" type="nuumber" id="Phone" name="Phone">
-					         <input type="submit" name="submit" value="Submit" class="loginconform">
-					   	</div>		
-					</form>
-					<br><br>
-			        <p> Booking ID should be produced 30 minutes before the allotted time to confirm the appointment!</p>
+					   		<label class="bookid" for="name">Name:</label>
+					   		<input type="text" name="name"><br>
+					   		<label class="bookid" for="num">Phone:</label>
+					   		<input type="text" name="num"><br><br>
+					   	</div>  
+					   	<input  type="button" name="confirm" value="Confirm Booking">
+					</div>
 	        </div>
         </div>
 	</div> 

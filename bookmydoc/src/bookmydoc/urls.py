@@ -8,6 +8,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     # Examples:
     url(r'^$', 'docProfile.views.home'),
+    url(r'^home/', 'docProfile.views.home'),
+
     url(r'^docprofile/', 'docProfile.views.prof', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^login-submit/', 'docProfile.views.loginform'),
@@ -15,7 +17,9 @@ urlpatterns = [
     url(r'^view-docdetails/', 'docProfile.views.docdetails'),
     url(r'^login/', 'docProfile.views.loginPage'),
     url(r'^book-doct/', 'docProfile.views.bookDoc'),
-
+    url(r'^confirm-book/', 'docProfile.views.confirm'),
+    url(r'^locdetailentry/', 'docProfile.views.locdetail'),
+    
     url(r'^admin/', include(admin.site.urls)),
 
 ] 

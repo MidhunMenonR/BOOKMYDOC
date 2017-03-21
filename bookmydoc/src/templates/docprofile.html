@@ -18,12 +18,16 @@
 		<div class="card">
 			<div class="first">
 				<div class="pic">
-					<img width="50%" src="{% static "img/name1.png" %}">
+					<img width="50%" src="/../media/{{ doctor.image }}">
 				</div>
 				<div class="detail">
 					<span class="docname">{{ doctor.doc_name }}</span><br>
 					<span class="doc-detail">{{ doctor.doc_department }}</span><br>
-					<span class="doc-detail">Address</span><br>
+					<span class="doc-detail">{{ doctor.qualification }}</span><br>
+					<span class="doc-detail">{{ doctor.experience }} experience </span><br>
+					<span class="doc-detail">{{ doctor.doc_phone }}</span><br>
+					<span class="doc-detail">{{ doctor.email }}</span><br>
+
 
 				</div>
 				
@@ -31,66 +35,199 @@
 			<div class="second">
 				<ul class="tab" ">
 					<div class="tabdiv">
-						<li id="tab1" onclick="openTab('Tab1','1')"><a href="javascript:void(0)" id="tablink1" class="tablink" >Tab1</a></li>
-						<li id="tab2" onclick="openTab('Tab2','2')""><a href="javascript:void(0)" id="tablink2" " class="tablink">Tab2</a></li>
-						<li id="tab3" onclick="openTab('Tab3','3')"><a href="javascript:void(0)" id="tablink3"  class="tablink">Tab3</a></li>
+						<li id="tab1" onclick="openTab('Tab1','1')"><a href="javascript:void(0)" id="tablink1" class="tablink" >{{ dates.0 | date:"SHORT_DATE_FORMAT"}}</a></li>
+						<li id="tab2" onclick="openTab('Tab2','2')""><a href="javascript:void(0)" id="tablink2" " class="tablink">{{ dates.1 | date:"SHORT_DATE_FORMAT"}}</a></li>
+						<li id="tab3" onclick="openTab('Tab3','3')"><a href="javascript:void(0)" id="tablink3"  class="tablink">{{ dates.2 | date:"SHORT_DATE_FORMAT"}}</a></li>
 					</div>
 				</ul>
 				
+				<div id="Tab1" class=" tabContent">
+				  <p>{% for l in locs %}
 
-				{% for l in locs %}	
-					<div id="Tab{{forloop.counter}}" class=" tabContent"   {% if not forloop.first %} style="display:none" {% endif %}  >
-						 <!--  m = forloop.counter -->
 						<form action="/book-doct/" method="GET"> 
 						  <h2>{{ l.location }}</h2>
-						  {% if forloop.first %}
-						  <p> {% for t in times.0 %}
-						  			<!-- {{t}} -->
+		   				{% if forloop.first %}						  	
+						  <p> {% for t in dayonetime.0 %}
+						  			<input type="hidden" name="bookdate" value="{{ dates.0 | date:'Y-m-d' }}">
 						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
 						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
 						  		{% endfor %}
-
-						  </p>
-						  {% endif %}
-						  {% if forloop.counter == 2 %} 
-						  	<p> {% for t in times.1 %}
-						  			<!-- {{t}} -->
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+						  	</p>	
+						{% endif %}
+						{% if forloop.counter == 2 %} 
+						  	<p> {% for t in dayonetime.1 %}
+						  			<input type="hidden" name="bookdate" value="{{ dates.0 | date:'Y-m-d'  }}">
+						  			
 						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
 
 						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
 						  		{% endfor %}
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+
 
 						  </p>
 
 
 						  {% endif %}
 						  {% if forloop.counter == 3 %} 
-						  	<p> {% for t in times.2 %}
-						  			<!-- {{t}} -->
+						  	<p> {% for t in dayonetime.2 %}
+						  			<input type="hidden" name="bookdate" value="{{ dates.0 | date:'Y-m-d'  }}">
+						  			
 						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
 						  			
 						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
 						  		{% endfor %}
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+
 
 						  </p>
 
 
 						  {% endif %}
-						  <input type="submit" name="submit" value="BOOK" class="login">
+
 						</form>
+					{% endfor %}	
+
+						  
+						  
 
 
-					</div>
-				{% endfor %}
 
+				  </p>
+				</div>
+
+				<div id="Tab2" class=" tabContent" style="display:none">
+				  
+				  <p>{% for l in locs %}
+
+						<form action="/book-doct/" method="GET"> 
+						  <h2>{{ l.location }}</h2>
+		   				{% if forloop.first %}						  	
+						  <p> {% for t in daytwotime.0 %}
+						  			
+						  			<input type="hidden" name="bookdate" value="{{ dates.1 | date:'Y-m-d'  }}">
+						  			
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+						  	</p>	
+						{% endif %}
+						{% if forloop.counter == 2 %} 
+						  	<p> {% for t in daytwotime.1 %}
+
+						  			<input type="hidden" name="bookdate" value="{{ dates.1 | date:'Y-m-d'  }}">
+
+						  			
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+
+
+						  </p>
+
+
+						  {% endif %}
+						  {% if forloop.counter == 3 %} 
+						  	<p> {% for t in daytwotime.2 %}
+
+						  			<input type="hidden" name="bookdate" value="{{ dates.1 | date:'Y-m-d'  }}">
+
+						  			
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+						  			
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+
+
+						  </p>
+
+
+						  {% endif %}
+
+						</form>
+					{% endfor %}	
+
+						  
+						  
+
+
+
+				  </p> 
+				</div>
+
+				<div id="Tab3" class=" tabContent" style="display:none">
+				  
+				  <p>{% for l in locs %}
+
+						<form action="/book-doct/" method="GET"> 
+						  <h2>{{ l.location }}</h2>
+		   				{% if forloop.first %}						  	
+						  <p> {% for t in daythreetime.0 %}
+						  			<input type="hidden" name="bookdate" value="{{ dates.2 | date:'Y-m-d'  }}">
+
+						  			
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+						  	</p>	
+						{% endif %}
+						{% if forloop.counter == 2 %} 
+						  	<p> {% for t in daythreetime.1 %}
+						  			<input type="hidden" name="bookdate" value="{{ dates.2 | date:'Y-m-d'  }}">
+						  			
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+
+
+						  </p>
+
+
+						  {% endif %}
+						  {% if forloop.counter == 3 %} 
+						  	<p> {% for t in daythreetime.2 %}
+						  			<input type="hidden" name="bookdate" value="{{ dates.2 | date:'Y-m-d'  }}">
+						  			
+						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
+						  			
+						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
+						  		{% endfor %}
+						  		<input type="submit" name="submit" value="BOOK" class="login">
+
+
+						  </p>
+
+
+						  {% endif %}
+
+						</form>
+					{% endfor %}	
+
+						  
+						  
+
+
+
+				  </p>	
+				</div>
+
+				
 
 			</div>
 		</div>
 	</div>
 	<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
-			<a href="index.html" class="navtext">Home</a>
-			<a href="login.html" class="navtext">Doctor Registration</a>
+			<a href="/home/" class="navtext">Home</a>
+			<a href="/login/" class="navtext">Doctor Registration</a>
 			<a href="#" class="navtext">About</a>
 			<a href="#" class="navtext">Help</a>
 	</div>

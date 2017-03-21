@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Doctor edit</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static "css/tiyaneethu.css"   %}" >
+</head>
+<body class="profile-body">
+	
+
+	<div id="main">
+		<div class="header" >
+			<span class="nav-icon" onclick="openNav()">&#9776;</span>
+			<img src="{% static "img/icon1.png" %}" height="100%" class="logo">
+		</div>
+		<div class="card">
+			<div class="first">
+				<div class="pic">
+					<img width="50%" src="{% static "img/name1.png" %}">
+				</div>
+				<div class="detail">
+					<span class="doc-name">{{ model.doc_name }}</span><br>
+					<span class="doc-detail">{{ model.doc_department }}</span><br>
+					<span class="doc-detail">{{ model.qualification }}</span><br>
+					<span class="doc-detail">{{ model.doc_phone }}</span><br>
+					<span class="doc-detail">{{ model.email }}</span><br>
+				</div>
+				</div>
+                <table align=center>
+					<tr>
+						<td>Day</td>
+						<td>Location</td>
+						<td>Starting_Time</td>
+						<td>Ending_Time</td>
+						<td>Remove</td>
+					</tr>
+
+					{% for ld in locationdetails %}
+						
+						<tr>
+						<td>{{ld.date}}</td>
+						<td>{{ ld.loc_id }}</td>
+                        <td>{{ ld.start_time }}</td>
+						<td>{{ ld.end_time }}</td>
+						<td><input type="submit" value="Remove" /></td>
+						</tr>
+					{% endfor %}
+					
+				</table><br>
+				<div class ="detail">
+				    <h2><u>Add New Entry(Follow the given format)</u></h2>
+				    <form action="/locdetailentry/" method="GET" style="text-align: right; vertical-align: top;display: inline-block;">
+						DATE (dd/mm/yyyy):   
+						<input type="date" name="date"><br>
+						LOCATION :
+						{% for l in locations %}
+							<input type="radio" name="location" value="{{l.location}}"> {{l.location}}<br>
+						{% endfor %}
+
+						<!-- <select title="location">
+							{% for l in locations %}
+								<option value="l.location">{{ l.location }} </option>
+							{% endfor %}
+						</select>
+						<br> -->
+						STARTING_TIME(hh:mm(24hr)) :
+						<input type="time" name="starttime"><br>
+						ENDING_TIME(hh:mm(24hr)) :
+						<input type="time" name="endtime"><br>
+						Duration(In minutes) :
+						<input type="text" name="duration"><br>
+						<input type="submit" value="Submit" /></td>
+					</form>
+				</div>	
+		</div> 
+	<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
+			<a href="/home/" class="navtext">Home</a>
+			<a href="/login/" class="navtext">Doctor Registration</a>
+			<a href="#" class="navtext">About</a>
+			<a href="#" class="navtext">Help</a>
+	</div>
+
+
+
+	<script src="{% static "js/bmd.js" %}"></script>
+</body>
+</html>

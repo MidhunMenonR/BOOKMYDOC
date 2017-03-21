@@ -4,6 +4,7 @@ from .models import DocDetails
 from .models import Locations
 from .models import BookDoc
 from .models import BookDetails
+import datetime
 # Create your views here.
 
 def home(request):
@@ -34,13 +35,23 @@ def loginform(request):
 	
 	
 	value = 0
+	locdets = []
+	locaddresses = []
 	usr = DocDetails.objects.get(doc_username=  data['usrnm'])
 	locs = Locations.objects.filter(doc_id = usr.doc_username )
+	#adding details of each location for different days
+	for l  in locs :
+		locationdetail = BookDoc.objects.filter(loc_id = l.id)
+		for ld in locationdetail :
+			
+			locdets.append(ld)
+
 
 	context ={
 		"title" : "Doctor",
 		"model" : usr,
-		"locations" : locs
+		"locations" : locs,
+		"locationdetails" : locdets
 	}
 	if usr.doc_password == data['pwd'] :
 		value = 1
@@ -48,9 +59,11 @@ def loginform(request):
 		print usr.pk
 		for l in locs :
 			print l.location
+			print l.id
+		print locdets
 
 	if value == 1:
-		return render(request,'docdetails.html',context)
+		return render(request,'Doc-edit.html',context)
 
 	else :	
 		return render(request,'login.html',{})
@@ -94,75 +107,13 @@ def searchform(request):
 		if data['srchname'] :
 			for d in doctor :
 				if 	data['srchname'] in d.doc_name.lower() :
-					print "working"
 					docobjectlist.append(d)
 		else :
 			docobjectlist = doctor
 	elif data['srchname'] :
 		docobjectlist = DocDetails.objects.filter(doc_name__icontains = data['srchname'])
 									
-						
-
-
-
-
-
-
-			
-
-
-	# if data['srchloc'] :
-	# 	tloclist = []
-	# 	slocations = Locations.objects.filter(area__icontains  = data['srchloc'])
-	# 	for sl in slocations:
-	# 		moredoctors = DocDetails.objects.get(doc_username = sl.doc_id)
-	# 		if data['srchname'] :
-	# 				tempdocobjectlist = []
-	# 				sdoctors = DocDetails.objects.filter(doc_name__icontains = data['srchname'])
-	# 				for sdo in sdoctors :
-	# 					if sdo.doc_username == moredoctors.doc_username :
-	# 						tempdocobjectlist.append(moredoctors)
-	# 				if data['srchdept'] :
-	# 					sdepts = DocDetails.objects.filter(doc_department__icontains  = data['srchdept'])
-	# 					for sd in sdepts:
-	# 						for temp in tempdocobjectlist :
-	# 							if sd.doc_username == temp.doc_username :
-	# 								docobjectlist.append(moredoctors)
-	# 				else :
-	# 					docobjectlist.append(moredoctors)
-
-
-
-	# 		else :	
-	# 			docobjectlist.append(moredoctors)	
-
-							
-
-
-
-
-	# if data['srchname'] :
-	# 	sdoctors = DocDetails.objects.filter(doc_name__icontains = data['srchname'])
-	# if data['srchloc'] :
-	# 	slocations = Locations.objects.filter(area__icontains  = data['srchloc'])
-	# if data['srchdept'] :	
-	# 	sdepts = DocDetails.objects.filter(doc_department__icontains  = data['srchdept'])
-	# # if data['srchloc'] :
-	# # 	for sl in slocations:
-	# # 		moredoctors = DocDetails.objects.filter(doc_username = sl.doc_id)
-	# # 		for md in moredoctors:
-	# # 			docobjectlist.append(md)
-	# if data['srchname'] :
-	# 	for sdo in sdoctors:
-	# 		docobjectlist.append(sdo)
-	# if data['srchdept'] :	
-	# 	for sd in sdepts:
-	# 		docobjectlist.append(sd)
 	
-
-	# docobjectlist=list(set(docobjectlist)) #to remove duplicates
-
-
 	for d in docobjectlist:
 		print d.doc_name
 		print d.doc_phone
@@ -179,10 +130,19 @@ def searchform(request):
 
 def docdetails(request):
 	data = request.GET
-	time_list=[]
 	localist = []
-	time_list = []
+	date_list = []
+	dayonetime_list = []
+	daytwotime_list = []
+	daythreetime_list = []
+
+
+
 	i=0
+	
+	date_list.append(datetime.date.today())
+	date_list.append(datetime.date.today() + datetime.timedelta(days=1))
+	date_list.append(datetime.date.today() + datetime.timedelta(days=2))
 	
 	
 
@@ -190,65 +150,136 @@ def docdetails(request):
 	loc = Locations.objects.filter(doc_id = doc.doc_username )
 
 
-	print 'name' + doc.doc_name
+	
 	for l in loc :
-		print 'location' + l.location
-		print 'id' + str(l.id)
-		# if i==0 :
-		# 	locdet = BookDoc.objects.filter(loc_id = l.id)
-		# 	i=1
-		# else :
-		# 	locdet += (BookDoc.objects.filter(loc_id = l.id))
 		locdet = BookDoc.objects.filter(loc_id = l.id)
 		localist += locdet
+	now = datetime.datetime.now().strftime('%H:%M:%S')
+	nhh = now.split(":")
+	nmm = int(nhh[1])
+	nhh = int(nhh[0])
 
 
 	for d in localist :
-		print 'start_time' + d.start_time #.strftime('%I:%H %p')
-		print 'address' + d.address
-		print 'duration' + str(d.duration)
 		shh = d.start_time.split(":")
 		curtime_list = []
 		
 		
-		print shh
+		
 		smm = int(shh[1])
 		shh = int(shh[0])
-		print smm
-		print shh
+		
 
 		ehh = d.end_time.split(":")
-		print ehh
+		
 		emm = int(ehh[1])
 		ehh = int(ehh[0])
 		
-		print emm
-		print ehh
+		
 
 		chh=shh
 		cmm=smm
+		datecheck = str(datetime.date.today() )
+		print datecheck
+		while(chh<ehh) :
+
+			
+			flag = 1 #for addind to timelist
+			if nhh >= chh :
+				flag = 0
+			elif (chh-1) == nhh :
+				if (cmm-nmm)<0 :
+					flag = 0 
+					
+
+
+			if(chh==12):
+				ctime=str(chh)+':'+str(cmm)+" "+'PM'
+
+			elif( chh<12):
+				ctime=str(chh)+':'+str(cmm)+" "+'AM'
+			else :
+				thh=(chh%12)
+				ctime=str(thh)+':'+str(cmm)+" "+'PM'
+			
+			# searching in bookdetails
+			if flag != 0 :
+				searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
+				
+				for s in searchtable :
+					if s.date == datecheck:
+						if s.doc_name == doc.doc_username :
+							for n in loc : 
+								if n.location == s.location :
+									if s.time_slot == ctime :
+										flag = 0
+
+								
+
+			if flag == 1 :
+				curtime_list.append(ctime)
+			cmm += d.duration
+			if(cmm >= 60):
+				if(chh < 23) :
+					chh+=1	
+					cmm=cmm%60
+				else :
+					break
+		dayonetime_list.append(curtime_list)			
+
+
+
+
+		shh = d.start_time.split(":")
+		curtime_list = []
+		
+		
+		
+		smm = int(shh[1])
+		shh = int(shh[0])
+		
+
+		ehh = d.end_time.split(":")
+		
+		emm = int(ehh[1])
+		ehh = int(ehh[0])
+		
+		
+
+		chh=shh
+		cmm=smm			
+			
+			
+		
+		datecheck = str(datetime.date.today()+datetime.timedelta(days=1) )
+		print datecheck
+
+
 
 		while(chh<ehh) :
 
 			flag = 1 #for addind to timelist
+
 			if(chh==12):
 				ctime=str(chh)+':'+str(cmm)+" "+'PM'
 
-			elif( (chh%12)==0):
+			elif( chh<12):
 				ctime=str(chh)+':'+str(cmm)+" "+'AM'
 			else :
-				thh=chh%12
+				thh=(chh%12)
 				ctime=str(thh)+':'+str(cmm)+" "+'PM'
-			print ctime
+			
 			# searching in bookdetails
 			searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
 			for s in searchtable :
-				for n in loc :
-					if n.location == s.location :
-						if s.time_slot == ctime :
-							flag =0
-							print 'notadded'
+				if s.date == datecheck:
+					if s.doc_name == doc.doc_username :
+						for n in loc : 
+							if n.location == s.location :
+								if s.time_slot == ctime :
+									flag = 0
 
+							
 			if flag == 1 :
 				curtime_list.append(ctime)
 			cmm += d.duration
@@ -261,30 +292,115 @@ def docdetails(request):
 			
 			
 			
-			print curtime_list
+			
 			
 		
 
 
 
-		time_list.append(curtime_list)
+		daytwotime_list.append(curtime_list)
+
+
+		shh = d.start_time.split(":")
+		curtime_list = []
+		
+		
+		
+		smm = int(shh[1])
+		shh = int(shh[0])
+		
+
+		ehh = d.end_time.split(":")
+		
+		emm = int(ehh[1])
+		ehh = int(ehh[0])
+		
+		
+
+		chh=shh
+		cmm=smm			
+			
+			
+		
+		datecheck = str(datetime.date.today()+datetime.timedelta(days=2) )
+		print datecheck
+
+
+		while(chh<ehh) :
+
+			flag = 1 #for addind to timelist
+
+			if(chh==12):
+				ctime=str(chh)+':'+str(cmm)+" "+'PM'
+
+			elif( chh<12):
+				ctime=str(chh)+':'+str(cmm)+" "+'AM'
+			else :
+				thh=(chh%12)
+				ctime=str(thh)+':'+str(cmm)+" "+'PM'
+			
+			# searching in bookdetails
+			searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
+			for s in searchtable :
+				if s.date == datecheck:
+					if s.doc_name == doc.doc_username :
+						for n in loc : 
+							if n.location == s.location :
+								if s.time_slot == ctime :
+									flag = 0
+				 
+				 
+				 
+
+							
+			if flag == 1 :
+				curtime_list.append(ctime)
+			cmm += d.duration
+			if(cmm >= 60):
+				if(chh < 23) :
+					chh+=1	
+					cmm=cmm%60
+				else :
+					break
+			
+			
+			
+			
+			
+		
 
 
 
+		daythreetime_list.append(curtime_list)
 
-		# print 'end_time' + d.end_time
-		# time_list.append(d.start_time)
-		# time_list.append(d.end_time)
-
+	
 
 
+	
 
-	print time_list
+
+
+		
+
+		
+
+
+		
+
+
+	print date_list[0]
+	print date_list[1]
+	print date_list[2]
+	
 	context = {
 		"doctor" : doc,
 		"locs" : loc,
 		"bookdet" : localist,
-		"times" : time_list
+		"dayonetime" : dayonetime_list,
+		"daytwotime" : daytwotime_list,
+		"daythreetime" : daythreetime_list,
+		"dates" : date_list
+
 
 	}
 
@@ -297,20 +413,61 @@ def bookDoc(request) :
 	data = request.GET
 	print data['timeslot']
 	print data['booklocation']
-	bookdet = BookDetails()
+	print data['bookdate']
 	doc = Locations.objects.get(location =  data['booklocation'] )
+	bookid = str(doc.doc_id) + data['booklocation'] + data['bookdate'] + data['timeslot']
 	print doc.doc_id
-	bookdet.doc_name = doc.doc_id
-	bookdet.location = data['booklocation']
-	bookdet.time_slot = data['timeslot']
-	bookdet.save()
+	print bookid
+	# bookdet.doc_name = doc.doc_id
+	# bookdet.location = data['booklocation']
+	# bookdet.time_slot = data['timeslot']
+	# bookdet.save()
 	
 	context = {
-		"time" : data['timeslot']
+		"time" : data['timeslot'],
+		"location" : data['booklocation'],
+		"date" : data['bookdate'],
+		"doctor" : doc.doc_id
+		
+
 
 	}
 
 	return render(request,'confirmationpage.html',context)
+def confirm(request) :
+	data = request.GET
+	bookdet = BookDetails()
 
+	bookdet.doc_name = data['dname']
+	bookdet.location = data['location']
+	bookdet.time_slot = data['timeslot']
+	bookdet.patientname = data['Pname']
+	bookdet.patientphone = data['Phone']
+	bookdet.date = data['date']
+	
+
+	bookdet.save()
+	context = {
+		"bookid" : bookdet.id
+	}
+	return render(request,'booked.html',context)
+def locdetail(request) :
+	data = request.GET
+	print data
+	print data['date']
+	print data['location']
+	print data['starttime']	 
+	loc = Locations.objects.get(location =  data['location'] )
+	bookdoc = BookDoc()
+	bookdoc.loc_id = loc
+	bookdoc.date = data['date']
+	bookdoc.start_time = data['starttime']	
+	bookdoc.end_time = data['endtime']	
+	bookdoc.duration = data['duration']
+	bookdoc.save()
+
+
+
+	return render(request,"index.html")
 
 

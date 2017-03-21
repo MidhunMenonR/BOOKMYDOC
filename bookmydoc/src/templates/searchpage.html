@@ -21,12 +21,15 @@
 				<form action="/view-docdetails/" method="GET"> 
 			    	<div class="second1">
 						<div class="pic1">
-							<img width="100%" src="{% static "img/name1.png"  %}" >
+							<!-- <img width="100%" src="{% static "img/name1.png"  %}" > -->
+							<img width="100%" src="/../media/{{ d.image }}" >
+
 						</div>	
 						<div class="detail1">
 						    <span style="font-size: 20px">{{ d.doc_name }}</span><br>
-							<span style="font-size: 15px">Qualification</span><br>
-							<span style="font-size: 15px">Address</span><br>
+							<span style="font-size: 15px">{{ d.doc_department }}</span><br>
+							<span style="font-size: 15px">{{ d.experience }} experience</span><br>
+							<span style="font-size: 15px">{{ d.qualification }}</span><br>
 					    </div>
 					    <div class="third">
 					    		<input type="hidden" name="docusername" value="{{ d.doc_username }}">
@@ -39,8 +42,8 @@
         
 	<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
-			<a href="index.html" class="navtext">Home</a>
-			<a href="login.html" class="navtext">Doctor Registration</a>
+			<a href="/home/" class="navtext">Home</a>
+			<a href="/login/" class="navtext">Doctor Registration</a>
 			<a href="#" class="navtext">About</a>
 			<a href="#" class="navtext">Help</a>
 	</div>

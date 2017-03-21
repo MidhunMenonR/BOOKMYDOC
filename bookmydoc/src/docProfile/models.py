@@ -20,22 +20,26 @@ class DocDetails(models.Model) :
 class Locations(models.Model) :
 	doc_id = models.ForeignKey(DocDetails)
 	location = models.CharField(max_length=50,unique = True)
+	address = models.CharField(max_length=200)
 	area = models.CharField(max_length = 50)
 	def __unicode__(self):
 		return self.location	
 
 class BookDoc(models.Model) :
 	loc_id = models.ForeignKey(Locations) 
-	address = models.CharField(max_length=200)
+	date = models.CharField(max_length = 10)
 	start_time = models.CharField(max_length=5)
 	end_time = models.CharField(max_length=5)
 	duration = models.IntegerField()
 	def __unicode__(self):
-		return self.address
+		return self.date
 
 class BookDetails(models.Model) :
 	doc_name = models.CharField(max_length=20)
 	location = models.CharField(max_length=50)
 	time_slot = models.CharField(max_length=5)
+	patientname = models.CharField(max_length=50)
+	patientphone = models.CharField(max_length=13)
+	date = models.CharField(max_length=15)
 	def __unicode__(self):
 		return self.doc_name
