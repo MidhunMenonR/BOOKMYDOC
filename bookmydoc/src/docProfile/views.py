@@ -150,7 +150,7 @@ def docdetails(request):
 	loc = Locations.objects.filter(doc_id = doc.doc_username )
 
 
-	
+	#creating list of locations of doctor
 	for l in loc :
 		locdet = BookDoc.objects.filter(loc_id = l.id)
 		localist += locdet
@@ -161,51 +161,153 @@ def docdetails(request):
 
 
 	for d in localist :
-		shh = d.start_time.split(":")
-		curtime_list = []
-		
-		
-		
-		smm = int(shh[1])
-		shh = int(shh[0])
-		
-
-		ehh = d.end_time.split(":")
-		
-		emm = int(ehh[1])
-		ehh = int(ehh[0])
-		
-		
-
-		chh=shh
-		cmm=smm
 		datecheck = str(datetime.date.today() )
-		print datecheck
-		while(chh<ehh) :
+		#checking whether doctor is available
+		datecyear = str(date_list[0])
+		datecyear = datecyear.split("-")
+		datecday = int(datecyear[0])
+		datecmonth = int(datecyear[1])
+		datecyear = int(datecyear[2])
+		print "printing..."
+		
+		datelyear = d.date.split("-")
+		datelday = int(datelyear[0])
+		datelmonth = int(datelyear[1])
+		datelyear = int(datelyear[2])
+		
+		
 
+		if((datecyear == datelyear) and (datecmonth == datelmonth) and (datecday == datelday)) :
+			print "datematch"
+
+
+			shh = d.start_time.split(":")
+			curtime_list = []
 			
-			flag = 1 #for addind to timelist
-			if nhh >= chh :
-				flag = 0
-			elif (chh-1) == nhh :
-				if (cmm-nmm)<0 :
-					flag = 0 
-					
-
-
-			if(chh==12):
-				ctime=str(chh)+':'+str(cmm)+" "+'PM'
-
-			elif( chh<12):
-				ctime=str(chh)+':'+str(cmm)+" "+'AM'
-			else :
-				thh=(chh%12)
-				ctime=str(thh)+':'+str(cmm)+" "+'PM'
 			
-			# searching in bookdetails
-			if flag != 0 :
-				searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
+			
+			smm = int(shh[1])
+			shh = int(shh[0])
+			
+
+			ehh = d.end_time.split(":")
+			
+			emm = int(ehh[1])
+			ehh = int(ehh[0])
+			
+			
+
+			chh=shh
+			cmm=smm
+			datecheck = str(datetime.date.today() )
+
+		
+			while(chh<ehh) :
+
 				
+				flag = 1 #for addind to timelist
+				if nhh >= chh :
+					flag = 0
+				elif (chh-1) == nhh :
+					if (cmm-nmm)<0 :
+						flag = 0 
+						
+
+
+				if(chh==12):
+					ctime=str(chh)+':'+str(cmm)+" "+'PM'
+
+				elif( chh<12):
+					ctime=str(chh)+':'+str(cmm)+" "+'AM'
+				else :
+					thh=(chh%12)
+					ctime=str(thh)+':'+str(cmm)+" "+'PM'
+				
+				# searching in bookdetails
+				if flag != 0 :
+					searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
+					
+					for s in searchtable :
+						if s.date == datecheck:
+							if s.doc_name == doc.doc_username :
+								for n in loc : 
+									if n.location == s.location :
+										if s.time_slot == ctime :
+											flag = 0
+
+									
+
+				if flag == 1 :
+					curtime_list.append(ctime)
+				cmm += d.duration
+				if(cmm >= 60):
+					if(chh < 23) :
+						chh+=1	
+						cmm=cmm%60
+					else :
+						break
+			dayonetime_list.append(curtime_list)			
+
+
+		#checking whether doctor is available
+		datecyear = str(date_list[1])
+		datecyear = datecyear.split("-")
+		datecday = int(datecyear[0])
+		datecmonth = int(datecyear[1])
+		datecyear = int(datecyear[2])
+		print "printing..."
+		
+		datelyear = d.date.split("-")
+		datelday = int(datelyear[0])
+		datelmonth = int(datelyear[1])
+		datelyear = int(datelyear[2])
+		
+		
+
+		if((datecyear == datelyear) and (datecmonth == datelmonth) and (datecday == datelday)) :
+			print "datematch"	
+
+			shh = d.start_time.split(":")
+			curtime_list = []
+			
+			
+			
+			smm = int(shh[1])
+			shh = int(shh[0])
+			
+
+			ehh = d.end_time.split(":")
+			
+			emm = int(ehh[1])
+			ehh = int(ehh[0])
+			
+			
+
+			chh=shh
+			cmm=smm			
+				
+				
+			
+			datecheck = str(datetime.date.today()+datetime.timedelta(days=1) )
+			
+
+
+
+			while(chh<ehh) :
+
+				flag = 1 #for addind to timelist
+
+				if(chh==12):
+					ctime=str(chh)+':'+str(cmm)+" "+'PM'
+
+				elif( chh<12):
+					ctime=str(chh)+':'+str(cmm)+" "+'AM'
+				else :
+					thh=(chh%12)
+					ctime=str(thh)+':'+str(cmm)+" "+'PM'
+				
+				# searching in bookdetails
+				searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
 				for s in searchtable :
 					if s.date == datecheck:
 						if s.doc_name == doc.doc_username :
@@ -215,182 +317,116 @@ def docdetails(request):
 										flag = 0
 
 								
+				if flag == 1 :
+					curtime_list.append(ctime)
+				cmm += d.duration
+				if(cmm >= 60):
+					if(chh < 23) :
+						chh+=1	
+						cmm=cmm%60
+					else :
+						break
+				
+				
+				
+				
+				
+			
 
-			if flag == 1 :
-				curtime_list.append(ctime)
-			cmm += d.duration
-			if(cmm >= 60):
-				if(chh < 23) :
-					chh+=1	
-					cmm=cmm%60
+
+
+			daytwotime_list.append(curtime_list)
+
+		datecyear = str(date_list[2])
+		datecyear = datecyear.split("-")
+		datecday = int(datecyear[0])
+		datecmonth = int(datecyear[1])
+		datecyear = int(datecyear[2])
+		print "printing..."
+		
+		datelyear = d.date.split("-")
+		datelday = int(datelyear[0])
+		datelmonth = int(datelyear[1])
+		datelyear = int(datelyear[2])
+		
+		
+
+		if((datecyear == datelyear) and (datecmonth == datelmonth) and (datecday == datelday)) :
+			print "datematch"	
+
+
+			shh = d.start_time.split(":")
+			curtime_list = []
+			
+			
+			
+			smm = int(shh[1])
+			shh = int(shh[0])
+			
+
+			ehh = d.end_time.split(":")
+			
+			emm = int(ehh[1])
+			ehh = int(ehh[0])
+			
+			
+
+			chh=shh
+			cmm=smm			
+				
+				
+			
+			datecheck = str(datetime.date.today()+datetime.timedelta(days=2) )
+			
+
+			while(chh<ehh) :
+
+				flag = 1 #for addind to timelist
+
+				if(chh==12):
+					ctime=str(chh)+':'+str(cmm)+" "+'PM'
+
+				elif( chh<12):
+					ctime=str(chh)+':'+str(cmm)+" "+'AM'
 				else :
-					break
-		dayonetime_list.append(curtime_list)			
+					thh=(chh%12)
+					ctime=str(thh)+':'+str(cmm)+" "+'PM'
+				
+				# searching in bookdetails
+				searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
+				for s in searchtable :
+					if s.date == datecheck:
+						if s.doc_name == doc.doc_username :
+							for n in loc : 
+								if n.location == s.location :
+									if s.time_slot == ctime :
+										flag = 0
+					 
+					 
+					 
 
-
-
-
-		shh = d.start_time.split(":")
-		curtime_list = []
-		
-		
-		
-		smm = int(shh[1])
-		shh = int(shh[0])
-		
-
-		ehh = d.end_time.split(":")
-		
-		emm = int(ehh[1])
-		ehh = int(ehh[0])
-		
-		
-
-		chh=shh
-		cmm=smm			
+								
+				if flag == 1 :
+					curtime_list.append(ctime)
+				cmm += d.duration
+				if(cmm >= 60):
+					if(chh < 23) :
+						chh+=1	
+						cmm=cmm%60
+					else :
+						break
+				
+				
+				
+				
+				
 			
-			
-		
-		datecheck = str(datetime.date.today()+datetime.timedelta(days=1) )
-		print datecheck
 
 
 
-		while(chh<ehh) :
-
-			flag = 1 #for addind to timelist
-
-			if(chh==12):
-				ctime=str(chh)+':'+str(cmm)+" "+'PM'
-
-			elif( chh<12):
-				ctime=str(chh)+':'+str(cmm)+" "+'AM'
-			else :
-				thh=(chh%12)
-				ctime=str(thh)+':'+str(cmm)+" "+'PM'
-			
-			# searching in bookdetails
-			searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
-			for s in searchtable :
-				if s.date == datecheck:
-					if s.doc_name == doc.doc_username :
-						for n in loc : 
-							if n.location == s.location :
-								if s.time_slot == ctime :
-									flag = 0
-
-							
-			if flag == 1 :
-				curtime_list.append(ctime)
-			cmm += d.duration
-			if(cmm >= 60):
-				if(chh < 23) :
-					chh+=1	
-					cmm=cmm%60
-				else :
-					break
-			
-			
-			
-			
-			
-		
-
-
-
-		daytwotime_list.append(curtime_list)
-
-
-		shh = d.start_time.split(":")
-		curtime_list = []
-		
-		
-		
-		smm = int(shh[1])
-		shh = int(shh[0])
-		
-
-		ehh = d.end_time.split(":")
-		
-		emm = int(ehh[1])
-		ehh = int(ehh[0])
-		
-		
-
-		chh=shh
-		cmm=smm			
-			
-			
-		
-		datecheck = str(datetime.date.today()+datetime.timedelta(days=2) )
-		print datecheck
-
-
-		while(chh<ehh) :
-
-			flag = 1 #for addind to timelist
-
-			if(chh==12):
-				ctime=str(chh)+':'+str(cmm)+" "+'PM'
-
-			elif( chh<12):
-				ctime=str(chh)+':'+str(cmm)+" "+'AM'
-			else :
-				thh=(chh%12)
-				ctime=str(thh)+':'+str(cmm)+" "+'PM'
-			
-			# searching in bookdetails
-			searchtable =  BookDetails.objects.filter(doc_name = data['docusername'])
-			for s in searchtable :
-				if s.date == datecheck:
-					if s.doc_name == doc.doc_username :
-						for n in loc : 
-							if n.location == s.location :
-								if s.time_slot == ctime :
-									flag = 0
-				 
-				 
-				 
-
-							
-			if flag == 1 :
-				curtime_list.append(ctime)
-			cmm += d.duration
-			if(cmm >= 60):
-				if(chh < 23) :
-					chh+=1	
-					cmm=cmm%60
-				else :
-					break
-			
-			
-			
-			
-			
-		
-
-
-
-		daythreetime_list.append(curtime_list)
-
-	
-
-
-	
-
-
+			daythreetime_list.append(curtime_list)
 
 		
-
-		
-
-
-		
-
-
-	print date_list[0]
-	print date_list[1]
-	print date_list[2]
 	
 	context = {
 		"doctor" : doc,

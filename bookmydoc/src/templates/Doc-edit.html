@@ -52,23 +52,18 @@
 				<div class ="detail">
 				    <h2><u>Add New Entry(Follow the given format)</u></h2>
 				    <form action="/locdetailentry/" method="GET" style="text-align: right; vertical-align: top;display: inline-block;">
-						DATE (dd/mm/yyyy):   
-						<input type="date" name="date"><br>
+						DATE (yyyy-mm-dd):   
+						<input type="text" name="date"><br>
 						LOCATION :
 						{% for l in locations %}
 							<input type="radio" name="location" value="{{l.location}}"> {{l.location}}<br>
 						{% endfor %}
 
-						<!-- <select title="location">
-							{% for l in locations %}
-								<option value="l.location">{{ l.location }} </option>
-							{% endfor %}
-						</select>
-						<br> -->
+						
 						STARTING_TIME(hh:mm(24hr)) :
-						<input type="time" name="starttime"><br>
+						<input type="text" name="starttime"><br>
 						ENDING_TIME(hh:mm(24hr)) :
-						<input type="time" name="endtime"><br>
+						<input type="text" name="endtime"><br>
 						Duration(In minutes) :
 						<input type="text" name="duration"><br>
 						<input type="submit" value="Submit" /></td>
