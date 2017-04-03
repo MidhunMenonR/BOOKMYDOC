@@ -51,7 +51,7 @@
 		}
 		
 		.profile-body {
-			background: lightgrey;
+			
 			width: 100%;
 			margin: 0px;
 			
@@ -238,15 +238,27 @@
 
 		@media only screen and (max-width: 768px) {
 			/* For mobile phones: */
+
+			.header{
+				height: 50px;
+				width: 100%;
+			}
+
+			.logo{
+				margin-top: 10px;
+				height: 35px;
+				width: 190px;
+			}
+
 			.login-card{
-				width: 70%;
+				width: 90%;
 			    margin-top:22%; 
 			    padding-bottom: 10%;
 			    padding-top: 5%;
 			}
 			
 			.nav-icon{
-				font-size: 13px;
+				font-size: 25px;
 			}
 
 			.search {
@@ -279,7 +291,7 @@
 	        }
 	        .card{
 	        	margin-top: 25%;
-	        	width: 80%;
+	        	width: 90%;
 	        	padding-bottom: 20%;
 	        }
 	        .tabhead{

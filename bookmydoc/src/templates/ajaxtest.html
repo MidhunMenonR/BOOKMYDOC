@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+	<button onclick="clicked()">
+		Click
+	</button>
+</body>
+<script type="text/javascript">
+		function clicked() {
+		$.post("/ajaxlocationentry/",
+	    {
+	        name: "Donald Duck",
+	        city: "Duckburg"
+	    },
+	    function(data, status){
+	        alert("Data: " + data + "\nStatus: " + status);
+	    });
+		}
+
+</script>
+</html>

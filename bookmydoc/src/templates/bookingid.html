@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BookingId</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static "css/tiyaneethu.css"   %}">
+</head>
+<body class="profile-body" background="{% static "img/grey-website-background-illusionapparel2.jpg" %}">
+	
+
+	<div id="main">
+		<div class="header" >
+			<span class="nav-icon" onclick="openNav()">&#9776;</span>
+			<img src="{% static "img/icon1.png" %}" class="logo">
+		</div>
+		<div class="confirm1">
+			
+			{% if flag == 0 %}
+			<div >
+				   <h1>Booking Successfull!</h1>
+				   	
+					   
+					   	<div class="confirm2";>
+					   	    <span style="font-size: 125%">Booking ID:  {{book.id}}</span><br>
+					   		<span>DOCTOR NAME:  {{book.doc_name}} </span><br>
+					   		<span>TIME: {{book.time_slot}}</span><br>
+					   		<span>LOCATION: {{book.location}}</span>
+					    </div>		
+					   	<br>			
+					
+			        <p > Booking ID should be produced 30 minutes before the allotted time to confirm the appointment!</p>
+			        
+			        	
+	        </div>
+	        {% endif %}	 
+	        {% if flag == 1 %}
+						<p style="text-align: center;">This time slot has already been booked</p>
+			{% endif %}	 
+					<form action="\home\">
+			        	<input class="butstyle" type="submit"  name="submit" value="Next Booking" class="nextbooking">
+			        </form>
+        </div>
+	</div> 
+	<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(1)" >&#10148;</a>
+			<a href="/home/" class="navtext">Home</a>
+			<a href="/login/" class="navtext">Doctor Login</a>
+			<a href="/about/" class="navtext">About</a>
+	</div>
+
+
+
+	<script src="{% static "js/bmd.js" %}"></script>
+</body>
+</html>

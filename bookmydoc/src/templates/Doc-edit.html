@@ -6,6 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static "css/tiyaneethu.css"   %}" >
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="{% static "js/jquery-3.2.0.slim.min.js" %}"></script> -->
+	
+
 </head>
 <body class="profile-body">
 	
@@ -13,12 +17,12 @@
 	<div id="main">
 		<div class="header" >
 			<span class="nav-icon" onclick="openNav()">&#9776;</span>
-			<img src="{% static "img/icon1.png" %}" height="100%" class="logo">
+			<img src="{% static "img/icon1.png" %}" class="logo">
 		</div>
 		<div class="card">
 			<div class="first">
 				<div class="pic">
-					<img width="50%" src="{% static "img/name1.png" %}">
+					<img width="50%" src="/../media/{{ model.image }}">
 				</div>
 				<div class="detail">
 					<span class="doc-name">{{ model.doc_name }}</span><br>
@@ -28,58 +32,145 @@
 					<span class="doc-detail">{{ model.email }}</span><br>
 				</div>
 				</div>
-                <table align=center>
-					<tr>
-						<td>Day</td>
-						<td>Location</td>
-						<td>Starting_Time</td>
-						<td>Ending_Time</td>
-						<td>Remove</td>
+                <table align=center id="loctable">
+					<tr style="background-color:  #616a6b  ">
+						<td style="color: white;">DATE</td>
+						<td style="color: white;">LOCATION</td>
+						<td style="color: white;">STARTING_TIME</td>
+						<td style="color: white;">ENDING_TIME</td>
+						<td style="color: white;">REMOVE</td>
 					</tr>
 
 					{% for ld in locationdetails %}
 						
-						<tr>
+						<tr id="{{ ld.id }}" >
+						<!-- <p hidden="true" >{{ld.id}}</p> -->
+						
 						<td>{{ld.date}}</td>
-						<td>{{ ld.loc_id }}</td>
+						<td>{{ ld.loc_id }} </td>
                         <td>{{ ld.start_time }}</td>
 						<td>{{ ld.end_time }}</td>
-						<td><input type="submit" value="Remove" /></td>
+						<td><input type='submit' value="Remove"   ></td>
 						</tr>
+						
 					{% endfor %}
 					
 				</table><br>
 				<div class ="detail">
 				    <h2><u>Add New Entry(Follow the given format)</u></h2>
-				    <form action="/locdetailentry/" method="GET" style="text-align: right; vertical-align: top;display: inline-block;">
+				    <div  style="text-align: right; vertical-align: top;display: inline-block;">{% csrf_token %}
 						DATE (yyyy-mm-dd):   
-						<input type="text" name="date"><br>
+						<input type="text" name="date" id="date"><br>
 						LOCATION :
 						{% for l in locations %}
-							<input type="radio" name="location" value="{{l.location}}"> {{l.location}}<br>
+							<input type="radio" name="location" id="location" value="{{l.location}}"> {{l.location}}<br>
 						{% endfor %}
 
 						
 						STARTING_TIME(hh:mm(24hr)) :
-						<input type="text" name="starttime"><br>
+						<input type="text" name="starttime" id="starttime"><br>
 						ENDING_TIME(hh:mm(24hr)) :
-						<input type="text" name="endtime"><br>
+						<input type="text" name="endtime" id="endtime"><br>
 						Duration(In minutes) :
-						<input type="text" name="duration"><br>
-						<input type="submit" value="Submit" /></td>
-					</form>
+						<input type="text" name="duration" id="duration"><br>
+						<button  onclick="clicked()" >Submit</button>
+						
+					</div>
 				</div>	
+				<h3 class="edit" ><b >PATIENT DETAILS</b></h3>
+				<table >
+					<tr style="background-color:   #616a6b  ">
+						<td style="color: white;">DATE</td>
+						<td style="color: white;">NAME</td>
+						<td style="color: white;">PHONE</td>
+						<td style="color: white;">LOCATION</td>
+						<td style="color: white;">TIME</td>
+						<td style="color: white;">BOOKING_ID</td>
+					</tr>
+					{% for bk in bookings %}
+						<tr>
+							<td>{{bk.date}}</td>
+							<td>{{bk.patientname}}</td>
+	                        <td>{{bk.patientphone}}</td>
+							<td>{{bk.location}}</td>
+							<td>{{bk.time_slot}}</td>
+							<td>{{bk.id}}</td>
+						</tr>
+					{% endfor %}	
+					
+				</table><br>
 		</div> 
 	<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(1)" >&#10148;</a>
 			<a href="/home/" class="navtext">Home</a>
-			<a href="/login/" class="navtext">Doctor Registration</a>
-			<a href="#" class="navtext">About</a>
-			<a href="#" class="navtext">Help</a>
+			<a href="/login/" class="navtext">Doctor Login</a>
+			<a href="/about/" class="navtext">About</a>
 	</div>
 
 
 
-	<script src="{% static "js/bmd.js" %}"></script>
+	
+	
 </body>
+<script src="{% static "js/bmd.js" %}"></script>
+	<script type="text/javascript">
+		var gid;
+		function clicked() {
+		var table = document.getElementById("loctable");
+		console.log($("input[name=location]:checked").val());
+		$.post("/ajaxlocationentry/",
+	    {
+	    	date:document.getElementById("date").value,
+	    	location: $("input[name=location]:checked").val(),
+	        starttime: document.getElementById("starttime").value,
+	        endtime: document.getElementById("endtime").value,
+	        duration:document.getElementById("duration").value 
+	    },
+	    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+        gid = data;
+        console.log("gid is coming");
+        console.log(gid);
+
+    	}	
+	    );
+	    var row = "<tr id='"+gid+"'><td>"+document.getElementById("date").value+"</td><td>"+$("input[name=location]:checked").val()+"</td><td>"+document.getElementById("starttime").value+"</td><td>"+document.getElementById("endtime").value+"</td><td><input type='submit' id='target' value='Remove' onclick='test()'  ></td></tr>";
+	    $('#loctable').append(row);
+	    
+		}
+
+		$('input[type=submit]' ).click(function() {
+		   
+		   trid = $(this).closest('tr').attr('id'); // table row ID 
+		   console.log(trid);
+		   /*var id = $(this).firstChild().text();
+		   console.log("id");
+		   console.log(id);*/
+		   var remrow = document.getElementById(trid);
+		   $.post("/ajaxlocationrem/",
+		    {
+		    	id:trid		
+		    },
+		    function(data, status){
+	        alert("Data: " + data + "\nStatus: " + status);
+	        
+	    	}	
+		    );
+		   $(remrow).remove();
+
+
+		 });
+		 /*function remove(e) {
+		 		// body...
+		 		alert("hello");
+		 		alert((e.target).id());
+
+		 	}	
+
+*/
+
+			/*$( '#target' ).click(function() {
+				  alert( "Handler for .click() called." );
+				});*/
+	</script>	
 </html>

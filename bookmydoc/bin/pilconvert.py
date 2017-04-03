@@ -1,4 +1,4 @@
-#!/home/greg/Desktop/BOOKMYDOC/bookmydoc/bin/python
+#!/home/greg/testenv/bin/python
 #
 # The Python Imaging Library.
 # $Id$

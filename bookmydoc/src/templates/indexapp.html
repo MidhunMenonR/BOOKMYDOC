@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book My Doc</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="{% static "css/bookmydoc.css"   %}">
+</head>
+<body >
+	<div id="main">
+		<div class="header">
+			<span class="nav-icon" onclick="openNav()">&#9776;</span>
+			<img src="{% static "img/icon1.png"   %}" class="logo">
+		</div>
+		<div class="search" >
+			<img src="{% static "img/name1.png"   %}" >
+			<img src="{% static "img/location1.png"   %}" >
+			<img src="{% static "img/dept1.png"   %}" ><br><br>
+			<div>
+				<form action="/search-submitapp/" method ="GET" class="searchform">
+					<input type="text" name="srchname" placeholder="Name" class="searchtext">
+					<input type="text" name="srchloc" placeholder="Location" class="searchtext" value="{{location}}">
+					<input type="text" name="srchdept" placeholder="Dept" class="searchtext"><br><br>
+					<input type="submit" name="submitsearc" value="Search" class="searchformsubmit">
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(1)" >&#10148;</a>
+			<a href="/apphome/" class="navtext">Home</a>
+			<a href="/login/" class="navtext">Doctor Login</a>
+			<a href="/about/" class="navtext">About</a>
+	</div>
+
+
+	<script type="text/javascript" src="{% static "js/bmd.js"   %}"></script>
+</body>
+</html>

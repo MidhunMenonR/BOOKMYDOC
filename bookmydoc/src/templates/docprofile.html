@@ -7,13 +7,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static "css/bookmydoc.css"   %}">
 </head>
-<body class="profile-body">
+<body class="profile-body" background="{% static "img/grey-website-background-illusionapparel2.jpg" %}">
 	
 
 	<div id="main">
 		<div class="header" >
 			<span class="nav-icon" onclick="openNav()">&#9776;</span>
-			<img src="{% static "img/icon1.png" %}" height="100%" class="logo">
+			<img src="{% static "img/icon1.png" %}" class="logo">
 		</div>
 		<div class="card">
 			<div class="first">
@@ -27,8 +27,8 @@
 					<span class="doc-detail">{{ doctor.experience }} experience </span><br>
 					<span class="doc-detail">{{ doctor.doc_phone }}</span><br>
 					<span class="doc-detail">{{ doctor.email }}</span><br>
-
-
+				
+						
 				</div>
 				
 			</div>
@@ -42,21 +42,30 @@
 				</ul>
 				
 				<div id="Tab1" class=" tabContent">
+				
 				  <p>{% for l in locs %}
 
 						<form action="/book-doct/" method="GET"> 
 						  <h2>{{ l.location }}</h2>
-		   				{% if forloop.first %}						  	
-						  <p> {% for t in dayonetime.0 %}
+						  
+						  
+		   				{% if forloop.first %}		
+		   					{% if dict.loc1day1 %}	
+		   						<p> {% for t in dict.loc1day1 %}
 						  			<input type="hidden" name="bookdate" value="{{ dates.0 | date:'Y-m-d' }}">
 						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
 						  			<input type="radio" name="timeslot" value="{{t}}"> {{t}}<br>
 						  		{% endfor %}
 						  		<input type="submit" name="submit" value="BOOK" class="login">
-						  	</p>	
+						  		</p>
+		   						{% else %}
+		   							<p>No bookings avaliable</p>
+		   					{% endif %}				  	
+						  	
 						{% endif %}
 						{% if forloop.counter == 2 %} 
-						  	<p> {% for t in dayonetime.1 %}
+		   					{% if dict.loc2day1 %}	
+						  	<p> {% for t in dict.loc2day1 %}
 						  			<input type="hidden" name="bookdate" value="{{ dates.0 | date:'Y-m-d'  }}">
 						  			
 						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
@@ -66,12 +75,17 @@
 						  		<input type="submit" name="submit" value="BOOK" class="login">
 
 
-						  </p>
+						 		 </p>
+						 	{% else %}
+						 		<p>No bookings avaliable</p>
+		   					{% endif %}		 
 
 
 						  {% endif %}
-						  {% if forloop.counter == 3 %} 
-						  	<p> {% for t in dayonetime.2 %}
+						  {% if forloop.counter == 3 %}
+		   					{% if dict.loc3day1 %}	
+
+						  	<p> {% for t in dict.loc3day1 %}
 						  			<input type="hidden" name="bookdate" value="{{ dates.0 | date:'Y-m-d'  }}">
 						  			
 						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
@@ -81,13 +95,20 @@
 						  		<input type="submit" name="submit" value="BOOK" class="login">
 
 
-						  </p>
+						  		</p>
+						  	{% else %}
+						 		<p>No bookings avaliable</p>
+		   					{% endif %}	
 
 
 						  {% endif %}
 
 						</form>
+
+						
 					{% endfor %}	
+
+				
 
 						  
 						  
@@ -103,8 +124,10 @@
 
 						<form action="/book-doct/" method="GET"> 
 						  <h2>{{ l.location }}</h2>
-		   				{% if forloop.first %}						  	
-						  <p> {% for t in daytwotime.0 %}
+		   				{% if forloop.first %}	
+		   					{% if dict.loc1day2 %}	
+
+						  <p> {% for t in dict.loc1day2 %}
 						  			
 						  			<input type="hidden" name="bookdate" value="{{ dates.1 | date:'Y-m-d'  }}">
 						  			
@@ -113,9 +136,18 @@
 						  		{% endfor %}
 						  		<input type="submit" name="submit" value="BOOK" class="login">
 						  	</p>	
+						  	{% else %}
+						 		<p>No bookings avaliable</p>
+		   					{% endif %}	
+
+
+
 						{% endif %}
 						{% if forloop.counter == 2 %} 
-						  	<p> {% for t in daytwotime.1 %}
+
+		   					{% if dict.loc2day2 %}	
+
+						  	<p> {% for t in dict.loc2day2 %}
 
 						  			<input type="hidden" name="bookdate" value="{{ dates.1 | date:'Y-m-d'  }}">
 
@@ -128,11 +160,16 @@
 
 
 						  </p>
+						  {% else %}
+						 		<p>No bookings avaliable</p>
+		   				  {% endif %}	
 
 
 						  {% endif %}
 						  {% if forloop.counter == 3 %} 
-						  	<p> {% for t in daytwotime.2 %}
+
+						  	{% if dict.loc3day2 %}	
+						  	<p> {% for t in dict.loc3day2 %}
 
 						  			<input type="hidden" name="bookdate" value="{{ dates.1 | date:'Y-m-d'  }}">
 
@@ -145,6 +182,9 @@
 
 
 						  </p>
+						  {% else %}
+						 		<p>No bookings avaliable</p>
+		   				  {% endif %}	
 
 
 						  {% endif %}
@@ -161,13 +201,17 @@
 				</div>
 
 				<div id="Tab3" class=" tabContent" style="display:none">
+
 				  
 				  <p>{% for l in locs %}
 
+
 						<form action="/book-doct/" method="GET"> 
 						  <h2>{{ l.location }}</h2>
-		   				{% if forloop.first %}						  	
-						  <p> {% for t in daythreetime.0 %}
+
+		   				{% if forloop.first %}
+		   				{% if dict.loc1day3 %}						  	
+						  <p> {% for t in dict.loc1day3 %}
 						  			<input type="hidden" name="bookdate" value="{{ dates.2 | date:'Y-m-d'  }}">
 
 						  			
@@ -176,9 +220,14 @@
 						  		{% endfor %}
 						  		<input type="submit" name="submit" value="BOOK" class="login">
 						  	</p>	
+						 {% else %}
+						 		<p>No bookings avaliable</p>
+		   				  {% endif %} 	
 						{% endif %}
 						{% if forloop.counter == 2 %} 
-						  	<p> {% for t in daythreetime.1 %}
+		   					{% if dict.loc2day3 %}						  	
+
+						  	<p> {% for t in dict.loc2day3 %}
 						  			<input type="hidden" name="bookdate" value="{{ dates.2 | date:'Y-m-d'  }}">
 						  			
 						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
@@ -189,11 +238,16 @@
 
 
 						  </p>
+						  {% else %}
+						 		<p>No bookings avaliable</p>
+		   				  {% endif %} 
 
 
 						  {% endif %}
 						  {% if forloop.counter == 3 %} 
-						  	<p> {% for t in daythreetime.2 %}
+		   					{% if dict.loc3day3 %}						  	
+
+						  	<p> {% for t in dict.loc3day3 %}
 						  			<input type="hidden" name="bookdate" value="{{ dates.2 | date:'Y-m-d'  }}">
 						  			
 						  			<input type="hidden" name="booklocation" value="{{ l.location }}">
@@ -204,6 +258,9 @@
 
 
 						  </p>
+						  {% else %}
+						 		<p>No bookings avaliable</p>
+		   				  {% endif %} 
 
 
 						  {% endif %}
@@ -225,11 +282,10 @@
 		</div>
 	</div>
 	<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(1)" >&#10148;</a>
 			<a href="/home/" class="navtext">Home</a>
-			<a href="/login/" class="navtext">Doctor Registration</a>
-			<a href="#" class="navtext">About</a>
-			<a href="#" class="navtext">Help</a>
+			<a href="/login/" class="navtext">Doctor Login</a>
+			<a href="/about/" class="navtext">About</a>
 	</div>
 
 

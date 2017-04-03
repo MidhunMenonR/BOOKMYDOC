@@ -14,13 +14,27 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
     url(r'^login-submit/', 'docProfile.views.loginform'),
     url(r'^search-submit/', 'docProfile.views.searchform'),
+    url(r'^search-submitapp/', 'docProfile.views.searchformapp'),
+
     url(r'^view-docdetails/', 'docProfile.views.docdetails'),
     url(r'^login/', 'docProfile.views.loginPage'),
     url(r'^book-doct/', 'docProfile.views.bookDoc'),
     url(r'^confirm-book/', 'docProfile.views.confirm'),
     url(r'^locdetailentry/', 'docProfile.views.locdetail'),
+    url(r'^locapp/', 'docProfile.views.location'),
+    url(r'^apphome/', 'docProfile.views.apphome'),
+    url(r'^notify/', 'docProfile.views.notification'),
+    url(r'^ajaxlocationentry/', 'docProfile.views.ajaxlocationentry'),
+    url(r'^doctorresponse/', 'docProfile.views.responsedoc'),
+    url(r'^sample/', 'docProfile.views.sample'),
+    url(r'^ajaxlocationrem/', 'docProfile.views.ajaxlocationrem'),
+    url(r'^regtoken/', 'docProfile.views.regtoken'),
+    url(r'^sebin/', 'docProfile.views.sebin'),
+    url(r'^about/', 'docProfile.views.about'),
+
     
     url(r'^admin/', include(admin.site.urls)),
+
 
 ] 
 

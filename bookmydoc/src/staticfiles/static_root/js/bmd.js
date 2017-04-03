@@ -7,15 +7,15 @@
 function openNav() {
     if(screen.width >768){
         document.getElementById("mySidenav").style.width = "300px";
-        document.getElementById("main").style.marginLeft = "300px";
+        //document.getElementById("main").style.marginLeft = "300px";
     }
     else{
-        document.getElementById("mySidenav").style.width = "150px";
-        document.getElementById("main").style.marginLeft = "150px"; 
+        document.getElementById("mySidenav").style.width = "250px";
+        //document.getElementById("main").style.marginLeft = "150px"; 
     }
 
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-      
+     
 }
 
 function closeNav(page) {

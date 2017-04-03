@@ -50,7 +50,7 @@
 		}
 		
 		.profile-body {
-			background: lightgrey;
+			
 			width: 100%;
 			margin: 0px;
 			/*padding:1%;*/
@@ -271,6 +271,17 @@
 
         @media only screen and (max-width: 768px) {
 			/* For mobile phones: */
+			
+			.header{
+				height: 50px;
+				width: 100%;
+			}
+
+			.logo{
+				margin-top: 10px;
+				height: 35px;
+				width: 190px;
+			}
 			.login-card{
 				width: 70%;
 			    margin-top:22%; 
@@ -279,11 +290,11 @@
 			}
 			
 			.nav-icon{
-				font-size: 13px;
+				font-size: 25px;
 			}
 
 			.card1 {
-				width: 80%;
+				width: 90%;
 			}
 			.detail1{
 				font-size: 15px;
@@ -301,6 +312,7 @@
 
 	        .pic1{
 	        	width: 40%;
+	        	padding-left: 1px;
 	        }
 
 
@@ -317,7 +329,7 @@
 	        	font-size: 20px;
 	        }
 	        .confirm{
-	        	width: 85%;
+	        	width: 90%;
 	        	height: 85vh;
 	        }
 	        .phonelabel{

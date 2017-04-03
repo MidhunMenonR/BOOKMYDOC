@@ -7,11 +7,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet"> 
 	<link rel="stylesheet" type="text/css" href="{% static "css/bookmydoc.css"   %}">
 </head>
-<body class="login-body" background="{% static "img/loginbg.jpg"   %}">
+<body class="login-body" background="{% static "img/grey-website-background-illusionapparel2.jpg" %}">
 
 		<div class="header">
 			<span class="nav-icon" onclick="openNav()">&#9776;</span>
-			<img src="{% static "img/icon1.png"   %}" height="100%" class="logo">
+			<img src="{% static "img/icon1.png"   %}" class="logo">
 		</div>
 	
 		<div class="login-card" >
@@ -31,11 +31,10 @@
 			
 		</div>
 		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(2)" >&#10148;</a>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(1)" >&#10148;</a>
 			<a href="/home/" class="navtext">Home</a>
-			<a href="/login/" class="navtext">Doctor Registration</a>
-			<a href="#" class="navtext">About</a>
-			<a href="#" class="navtext">Help</a>
+			<a href="/login/" class="navtext">Doctor Login</a>
+			<a href="/about/" class="navtext">About</a>
 		</div>
 	
 		<script type="text/javascript" src="{% static "js/bmd.js"   %}""></script>

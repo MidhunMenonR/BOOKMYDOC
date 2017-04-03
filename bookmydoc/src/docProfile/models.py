@@ -43,3 +43,9 @@ class BookDetails(models.Model) :
 	date = models.CharField(max_length=15)
 	def __unicode__(self):
 		return self.doc_name
+
+class EmergDoctor(models.Model) :
+	doctor =models.CharField(max_length=20,unique = True)
+	regtoken = models.CharField(max_length=500)
+	def __unicode__(self):
+		return self.doctor

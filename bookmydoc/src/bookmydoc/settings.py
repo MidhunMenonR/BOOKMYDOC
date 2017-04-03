@@ -37,9 +37,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'docProfile'
+    'docProfile',
+    "fcm_django"
+ 
 )
 
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": "AIzaSyA6fsGpHuvJTzfWlTgER6mq6ATIp_V34Js"
+}
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

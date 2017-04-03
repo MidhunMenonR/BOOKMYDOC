@@ -1,0 +1,45 @@
+{% load static %}
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>About Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static "css/tiyaneethu.css"   %}">
+</head>
+<body class ="profile-body" background="{% static "img/grey-website-background-illusionapparel2.jpg" %}">
+	
+
+	<div id="main">
+		<div class="header" >
+			<span class="nav-icon" onclick="openNav()">&#9776;</span>
+			<img src="{% static "img/icon1.png"   %}"  class="logo">
+		</div>
+		
+	     
+        </div>
+	</div> 
+	<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav(1)" >&#10148;</a>
+			<a href="index.html" class="navtext">Home</a>
+			<a href="login.html" class="navtext">Doctor Login</a>
+			<a href="/about/" class="navtext">About</a>
+			
+	</div>	
+      	<div class=" dabout" >
+	      	<span class="abouthead">ABOUT ME</span><br>
+	      	<span class="quote">"The best doctor is the one you run to and can't find"</span>
+      	</div>
+		      <div class="para">
+		      	<p>The website provides a convenient way for patients to book appointments for consulting a doctor according to their preferences.</p>
+		      	<p>Doctors can register by providing necessary details regarding  specialization, location, time slots available for  consultation at each location, maximum number of appointments at each location and a password for logging in later. Once registration is complete, the doctor will be provided a unique DoctorID which is to be used along with the password to log and make any modifications to their prior entries. The details of a registered doctor will be available to the patient for booking appointments.
+				The patient has the option to choose from a variety of search criteria, namely, doctor name, specialization, location,  to find a doctor and book appointments. Upon fixing the appointment, the user will be provided with a booking ID which is to be produced 30min before the allotted time at the appropriate location to confirm the appointment.</p>
+	      	
+	      </div>
+    	
+    </div>
+
+
+	<script src="{% static "js/bmd.js" %}"></script>
+</body>
+</html>
